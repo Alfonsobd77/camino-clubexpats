@@ -1,0 +1,944 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Camino Club eXpats</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="El Camino de Santiago · Edición Club eXpats. Sarria → Santiago, del 8 al 15 de junio de 2027. Grupo de 10 a 12 personas. Evermind × Club eXpats.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Public+Sans:wght@300;400;600&display=swap">
+<style>
+/* Layout: one long walk. A fixed route rail (Sarria km 116 → Santiago km 0) tracks the reader;
+   each section is a stop, marked with a mojón showing the km left. Brand palette only, single light theme. */
+:root {
+  --midnight: #0F1E2D;
+  --light: #ECEDE8;
+  --sage: #ACB090;
+  --red: #CC463A;
+  --ground: #F4DCAB;
+  --paper: #F4F4F0;          /* Core Light 90 */
+  --ink-soft: #3B4753;       /* Midnight at ~80% on light */
+  --line: #C9CBBE;           /* Sage-tinted hairline */
+  --sans: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --gutter: clamp(16px, 5vw, 64px);
+  --max: 1180px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--light); color: var(--midnight); font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+h1, h2, h3 { font-weight: 300; margin: 0; text-wrap: balance; }
+em, .it { font-family: var(--serif); font-style: italic; font-weight: 400; }
+p { margin: 0; }
+.wrap { max-width: var(--max); margin: 0 auto; padding-inline: var(--gutter); }
+.serif { font-family: var(--serif); font-weight: 400; }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.body { font-family: var(--serif); font-size: 19px; line-height: 1.45; max-width: 60ch; }
+.section { padding-block: clamp(72px, 10vw, 128px); position: relative; }
+.h2 { font-size: clamp(34px, 4.6vw, 54px); line-height: 1.04; letter-spacing: -.01em; }
+.h2 em { color: var(--red); }
+.dark { background: var(--midnight); color: var(--light); }
+.dark .h2 em { color: var(--ground); }
+
+/* Buttons: straight edges like evermindconsulting.com */
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; font: 600 13px/1 var(--sans); letter-spacing: .04em; text-decoration: none; border: 1px solid currentColor; cursor: pointer; background: transparent; color: inherit; transition: background .2s, color .2s; }
+.btn-solid { background: var(--light); color: var(--midnight); border-color: var(--light); }
+.btn-solid:hover { background: var(--ground); border-color: var(--ground); }
+.btn-ghost:hover { background: rgba(236,237,232,.12); }
+.btn-red { background: var(--red); border-color: var(--red); color: var(--light); }
+.btn-red:hover { background: var(--midnight); border-color: var(--midnight); }
+.btn svg { width: 18px; height: 18px; }
+
+/* Icons */
+.ico { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.ico-ring { width: 54px; height: 54px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; flex: none; color: var(--midnight); }
+.dark .ico-ring { border-color: rgba(236,237,232,.3); color: var(--ground); }
+
+/* Mojón: Camino stone marker with km left */
+.mojon { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.mojon-stone { width: 46px; height: 56px; border-radius: 10px 10px 3px 3px; background: var(--midnight); color: var(--ground); display: grid; place-items: center; padding-top: 4px; }
+.dark .mojon-stone { background: var(--ground); color: var(--midnight); }
+.mojon-stone svg { width: 26px; height: 26px; }
+.mojon-txt { display: grid; gap: 2px; }
+.mojon-km { font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+.dark .mojon-km { color: var(--ground); }
+.mojon-place { font-family: var(--serif); font-size: 18px; line-height: 1; }
+
+/* Header */
+.top { position: fixed; inset: 0 0 auto 0; z-index: 30; padding-top: env(safe-area-inset-top, 0px); transition: background .3s, color .3s; color: var(--light); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 16px; }
+.top .logo-l, .top .logo-d { height: 34px; width: auto; }
+.top .logo-d { display: none; }
+.top nav { display: flex; gap: 26px; align-items: center; }
+.top nav a { font-size: 13px; text-decoration: none; opacity: .9; }
+.top nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 6px; }
+.top.solid { background: var(--light); color: var(--midnight); border-bottom: 1px solid var(--line); }
+.top.solid .logo-l { display: none; }
+.top.solid .logo-d { display: block; }
+.top.solid .btn-solid { background: var(--midnight); color: var(--light); border-color: var(--midnight); }
+@media (max-width: 900px) { .top nav a:not(.btn) { display: none; } .top .btn { padding: 11px 14px; } }
+
+/* Route rail */
+.rail { position: fixed; left: 22px; top: 50%; transform: translateY(-50%); z-index: 20; display: none; }
+.rail ol { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 30px; }
+.rail ol::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 1px; background: var(--line); }
+.rail .fill { position: absolute; left: 5px; top: 6px; width: 1px; background: var(--red); height: 0; transition: height .5s ease; }
+.rail li a { display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 11px; letter-spacing: .06em; color: var(--ink-soft); position: relative; }
+.rail .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--light); border: 1px solid var(--sage); flex: none; transition: background .3s, border-color .3s, transform .3s; }
+.rail .lbl { opacity: 0; transform: translateX(-4px); transition: opacity .25s, transform .25s; white-space: nowrap; background: var(--light); padding: 2px 6px; }
+.rail:hover .lbl, .rail li.on .lbl { opacity: 1; transform: none; }
+.rail li.done .dot { background: var(--red); border-color: var(--red); }
+.rail li.on .dot { background: var(--red); border-color: var(--red); transform: scale(1.35); }
+.rail li.on a { color: var(--midnight); font-weight: 600; }
+.rail.on-dark .lbl { background: var(--midnight); color: var(--light); }
+@media (min-width: 1280px) { .rail { display: block; } }
+/* Mobile progress */
+.progress { position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; background: var(--midnight); color: var(--light); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 12px; font-size: 12px; transform: translateY(110%); transition: transform .3s; }
+.progress.show { transform: none; }
+.progress .bar { flex: 1; height: 2px; background: rgba(236,237,232,.25); position: relative; }
+.progress .bar i { position: absolute; inset: 0 auto 0 0; background: var(--ground); width: 0; transition: width .4s; }
+.progress b { font-weight: 600; letter-spacing: .04em; }
+.progress a { color: var(--ground); font-weight: 600; text-decoration: none; white-space: nowrap; }
+@media (min-width: 1280px) { .progress { display: none; } }
+
+/* Hero */
+.hero { position: relative; min-height: min(92vh, 860px); color: var(--light); display: flex; align-items: flex-end; overflow: hidden; background: var(--midnight); }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 45%; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15,30,45,.88) 0%, rgba(15,30,45,.55) 45%, rgba(15,30,45,0) 75%), linear-gradient(0deg, rgba(15,30,45,.65) 0%, rgba(15,30,45,0) 40%); }
+.hero .wrap { position: relative; z-index: 1; width: 100%; padding-block: 140px 64px; }
+.hero .eyebrow { color: var(--sage); margin-bottom: 18px; }
+.hero h1 { font-family: var(--sans); font-weight: 300; font-size: clamp(46px, 8vw, 104px); line-height: .95; letter-spacing: -.02em; }
+.hero h1 em { display: block; color: var(--ground); font-size: 1.04em; letter-spacing: -.01em; }
+.hero .lead { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 26px); margin-top: 22px; max-width: 30ch; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 30px; font-size: 13px; letter-spacing: .03em; }
+.hero .meta span { display: inline-flex; align-items: center; gap: 8px; }
+.hero .meta .ico { width: 18px; height: 18px; color: var(--ground); }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+/* Statement */
+.statement { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: end; }
+.statement h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 4.4vw, 56px); line-height: 1.05; }
+.statement h2 em { color: var(--red); }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: clamp(48px, 7vw, 88px); }
+.stat { border-top: 1px solid var(--sage); padding-top: 16px; min-width: 0; }
+.stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 4vw, 48px); line-height: 1; color: var(--red); }
+.stat span { display: block; margin-top: 10px; font-size: 13px; color: var(--ink-soft); }
+@media (max-width: 860px) { .statement { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Para quién */
+.who { display: grid; grid-template-columns: 1fr 0.8fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
+.who-photo { aspect-ratio: 4/5; overflow: hidden; max-width: 100%; }
+.who-photo img { width: 100%; height: 100%; object-fit: cover; }
+.gains { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 28px; margin-top: 40px; }
+.gain { display: flex; gap: 16px; min-width: 0; }
+.gain h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.gain p { font-family: var(--serif); font-size: 17px; line-height: 1.35; }
+@media (max-width: 860px) { .who { grid-template-columns: 1fr; } .who-photo { aspect-ratio: 16/10; order: -1; } }
+@media (max-width: 520px) { .gains { grid-template-columns: 1fr; } }
+
+/* Tres momentos */
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-top: 48px; }
+.moment { position: relative; aspect-ratio: 3/4.2; overflow: hidden; color: var(--light); max-width: 100%; }
+.moment img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+.moment:hover img { transform: scale(1.04); }
+.moment::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(15,30,45,.92) 0%, rgba(15,30,45,.35) 45%, rgba(15,30,45,0) 70%); }
+.moment-txt { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; padding: 28px; }
+.moment .ico { color: var(--ground); width: 30px; height: 30px; }
+.moment h3 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(32px, 3.4vw, 44px); color: var(--ground); margin: 10px 0 8px; }
+.moment p { font-family: var(--serif); font-size: 17px; line-height: 1.35; }
+@media (max-width: 860px) { .trio { grid-template-columns: 1fr; } .moment { aspect-ratio: 4/3; } }
+
+/* Itinerario */
+.route { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); margin-top: 48px; align-items: start; }
+.days { list-style: none; margin: 0; padding: 0; position: relative; }
+.days::before { content: ""; position: absolute; left: 21px; top: 24px; bottom: 24px; width: 1px; background: var(--line); }
+.day { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 18px; padding: 16px 12px 16px 0; cursor: pointer; border-radius: 2px; transition: background .25s; }
+.day:hover, .day.on { background: rgba(172,176,144,.18); }
+.day-n { width: 44px; height: 44px; border-radius: 50%; background: var(--light); border: 1px solid var(--sage); display: grid; place-items: center; font-family: var(--serif); font-size: 19px; color: var(--red); position: relative; z-index: 1; transition: background .25s, color .25s; }
+.day.on .day-n { background: var(--red); border-color: var(--red); color: var(--light); }
+.day-date { font: 600 11px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.day h3 { font-family: var(--serif); font-weight: 400; font-size: 23px; line-height: 1.15; margin-top: 6px; }
+.day p { font-family: var(--serif); font-size: 16px; line-height: 1.38; color: var(--ink-soft); margin-top: 6px; }
+.day .tag { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--red); }
+.day-km { text-align: right; min-width: 72px; }
+.day-km b { font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1; display: block; }
+.day-km small { font-size: 11px; color: var(--ink-soft); }
+.kmbar { height: 3px; background: var(--line); margin-top: 8px; position: relative; }
+.kmbar i { position: absolute; inset: 0 auto 0 0; background: var(--sage); }
+.route-photo { position: sticky; top: 108px; }
+.route-photo figure { margin: 0; aspect-ratio: 4/5; overflow: hidden; background: var(--midnight); position: relative; max-width: 100%; }
+.route-photo img { width: 100%; height: 100%; object-fit: cover; transition: opacity .35s; }
+.route-photo figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px; color: var(--light); background: linear-gradient(0deg, rgba(15,30,45,.85), rgba(15,30,45,0)); }
+.route-photo figcaption b { display: block; font-family: var(--serif); font-weight: 400; font-size: 26px; }
+.route-photo figcaption span { font-size: 12px; letter-spacing: .06em; }
+.route-total { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 18px; font-size: 13px; color: var(--ink-soft); }
+@media (max-width: 960px) { .route { grid-template-columns: 1fr; } .route-photo { display: none; } }
+
+/* Dormir + incluye */
+.stay { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
+.stay-photo { aspect-ratio: 3/4; overflow: hidden; max-width: 100%; }
+.stay-photo img { width: 100%; height: 100%; object-fit: cover; }
+.feats { display: grid; gap: 18px; margin-top: 32px; }
+.feat { display: flex; align-items: center; gap: 16px; font-family: var(--serif); font-size: 18px; line-height: 1.3; }
+@media (max-width: 860px) { .stay { grid-template-columns: 1fr; } .stay-photo { aspect-ratio: 16/10; } }
+.incl { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 4px; margin-top: 56px; }
+.incl-yes { background: var(--paper); padding: clamp(24px, 4vw, 44px); }
+.incl-no { background: var(--midnight); color: var(--light); padding: clamp(24px, 4vw, 44px); }
+.incl h3 { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 22px; }
+.incl-no h3 { color: var(--sage); }
+.incl ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.incl-yes ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 28px; }
+.incl li { display: flex; gap: 12px; align-items: center; font-family: var(--serif); font-size: 17px; line-height: 1.3; min-width: 0; }
+.incl-yes .ico { color: var(--red); }
+.incl-no li::before { content: "—"; color: var(--ground); font-family: var(--sans); }
+@media (max-width: 860px) { .incl { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .incl-yes ul { grid-template-columns: 1fr; } }
+
+/* Método + anfitriones */
+.method { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
+.steps { list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 0; position: relative; }
+.steps::before { content: ""; position: absolute; left: 25px; top: 26px; bottom: 26px; width: 1px; background: rgba(236,237,232,.25); }
+.steps li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 22px; padding-block: 16px; }
+.steps .n { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--sage); display: grid; place-items: center; font-family: var(--serif); font-size: 21px; color: var(--ground); background: var(--midnight); position: relative; z-index: 1; }
+.steps h3 { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.steps p { font-family: var(--serif); font-size: 18px; line-height: 1.38; margin-top: 6px; color: rgba(236,237,232,.88); }
+.method-photo { aspect-ratio: 3/4; overflow: hidden; max-width: 100%; }
+.method-photo img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 860px) { .method { grid-template-columns: 1fr; } .method-photo { aspect-ratio: 16/10; } }
+.hosts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; margin-top: 72px; }
+.host { background: rgba(236,237,232,.06); padding: clamp(24px, 4vw, 40px); display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 22px; align-items: start; }
+.host .ph { width: 84px; height: 84px; border-radius: 50%; background: var(--sage); color: var(--midnight); display: grid; place-items: center; font-family: var(--serif); font-style: italic; font-size: 30px; }
+.host h3 { font-family: var(--serif); font-weight: 400; font-size: 30px; line-height: 1.05; }
+.host .role { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ground); margin-top: 6px; }
+.host p { font-family: var(--serif); font-size: 17px; line-height: 1.4; margin-top: 12px; color: rgba(236,237,232,.88); }
+@media (max-width: 760px) { .hosts { grid-template-columns: 1fr; } }
+
+/* Prepárate */
+.prep { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+.prep-photo { position: sticky; top: 108px; aspect-ratio: 3/4; overflow: hidden; max-width: 100%; }
+.prep-photo img { width: 100%; height: 100%; object-fit: cover; }
+.tips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 32px; margin-top: 40px; }
+.tip { min-width: 0; }
+.tip-h { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.tip-h h3 { font-size: 15px; font-weight: 600; }
+.tip ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+.tip li { font-family: var(--serif); font-size: 17px; line-height: 1.35; padding-left: 18px; position: relative; }
+.tip li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 1px; background: var(--red); }
+.pack { margin-top: 44px; background: var(--paper); padding: clamp(22px, 3.5vw, 36px); }
+.pack-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 18px; }
+.pack-head h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; }
+.pack-head h3 em { color: var(--red); }
+.pack-count { font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.pack-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; }
+.pack-list label { display: flex; gap: 12px; align-items: flex-start; font-family: var(--serif); font-size: 17px; line-height: 1.3; cursor: pointer; padding-block: 4px; min-width: 0; }
+.pack-list input { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; border: 1px solid var(--sage); background: var(--light); flex: none; margin-top: 2px; display: grid; place-items: center; cursor: pointer; }
+.pack-list input:checked { background: var(--red); border-color: var(--red); }
+.pack-list input:checked::after { content: ""; width: 9px; height: 5px; border-left: 1.5px solid var(--light); border-bottom: 1.5px solid var(--light); transform: rotate(-45deg) translate(1px, -1px); }
+.pack-list input:checked + span { color: var(--ink-soft); text-decoration: line-through; text-decoration-color: var(--sage); }
+@media (max-width: 960px) { .prep { grid-template-columns: 1fr; } .prep-photo { position: static; aspect-ratio: 16/10; } }
+@media (max-width: 600px) { .tips, .pack-list { grid-template-columns: 1fr; } }
+
+/* FAQ */
+.faq-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
+.faq-tabs button { font: 600 12px/1 var(--sans); letter-spacing: .06em; padding: 12px 16px; border: 1px solid var(--midnight); background: transparent; color: var(--midnight); cursor: pointer; }
+.faq-tabs button[aria-selected="true"] { background: var(--midnight); color: var(--light); }
+.faq-list { margin-top: 28px; border-top: 1px solid var(--line); }
+.faq-list details { border-bottom: 1px solid var(--line); }
+.faq-list summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0; font-family: var(--serif); font-size: clamp(19px, 2vw, 23px); line-height: 1.25; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary .pm { width: 30px; height: 30px; border: 1px solid var(--sage); border-radius: 50%; display: grid; place-items: center; flex: none; transition: transform .25s, background .25s; }
+.faq-list summary .pm::before { content: "+"; font-family: var(--sans); font-size: 18px; line-height: 1; color: var(--red); }
+.faq-list details[open] summary .pm { transform: rotate(45deg); background: var(--paper); }
+.faq-list .a { padding: 0 0 24px; max-width: 70ch; font-family: var(--serif); font-size: 18px; line-height: 1.45; color: var(--ink-soft); }
+.faq-note { margin-top: 22px; font-size: 13px; color: var(--ink-soft); }
+
+/* Reserva */
+.reserve { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 72px); align-items: start; margin-top: 48px; }
+.price-card { border: 1px solid rgba(236,237,232,.25); padding: clamp(24px, 4vw, 40px); position: sticky; top: 108px; }
+.price-card .eyebrow { color: var(--sage); }
+.price { font-family: var(--serif); font-size: clamp(64px, 8vw, 92px); line-height: 1; margin: 14px 0 6px; font-variant-numeric: tabular-nums; }
+.price-sub { font-family: var(--serif); font-size: 18px; color: rgba(236,237,232,.85); }
+.pay { list-style: none; margin: 28px 0 0; padding: 0; display: grid; }
+.pay li { display: flex; justify-content: space-between; gap: 16px; padding-block: 14px; border-top: 1px solid rgba(236,237,232,.18); font-size: 14px; }
+.pay li b { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ground); white-space: nowrap; }
+.seats { display: flex; gap: 6px; margin-top: 26px; }
+.seats i { flex: 1; height: 8px; background: var(--ground); }
+.seats-txt { margin-top: 10px; font-size: 12px; letter-spacing: .06em; color: var(--sage); }
+.flow { list-style: none; margin: 0 0 36px; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; counter-reset: f; }
+.flow li { background: rgba(236,237,232,.06); padding: 16px 14px; font-size: 12.5px; line-height: 1.35; min-width: 0; }
+.flow li b { display: block; font-family: var(--serif); font-weight: 400; font-size: 26px; color: var(--ground); line-height: 1; margin-bottom: 8px; }
+.flow li span { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--sage); margin-top: 6px; }
+@media (max-width: 760px) { .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+form.book { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 20px; }
+.f { display: grid; gap: 8px; min-width: 0; }
+.f.full { grid-column: 1 / -1; }
+.f label, .f legend { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sage); }
+.f input, .f select, .f textarea { width: 100%; font: 300 16px/1.4 var(--sans); color: var(--light); background: transparent; border: 0; border-bottom: 1px solid rgba(236,237,232,.4); padding: 10px 0; border-radius: 0; }
+.f select { appearance: none; -webkit-appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--ground) 50%), linear-gradient(135deg, var(--ground) 50%, transparent 50%); background-position: calc(100% - 12px) 55%, calc(100% - 7px) 55%; background-size: 5px 5px; background-repeat: no-repeat; }
+.f select option { color: var(--midnight); }
+.f input:focus, .f select:focus, .f textarea:focus { outline: none; border-bottom-color: var(--ground); }
+.f textarea { min-height: 84px; resize: vertical; }
+fieldset.f { border: 0; padding: 0; margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips label { text-transform: none; letter-spacing: 0; font-weight: 300; font-size: 14px; color: var(--light); border: 1px solid rgba(236,237,232,.35); padding: 9px 14px; cursor: pointer; }
+.chips input { position: absolute; opacity: 0; pointer-events: none; }
+.chips label:has(input:checked) { background: var(--ground); color: var(--midnight); border-color: var(--ground); }
+.chips label:has(input:focus-visible) { outline: 2px solid var(--red); outline-offset: 2px; }
+.check { display: flex; gap: 12px; align-items: flex-start; font-family: var(--serif); font-size: 16px; line-height: 1.35; color: rgba(236,237,232,.9); text-transform: none; letter-spacing: 0; font-weight: 400; }
+.check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--red); flex: none; }
+.err { font-size: 12px; color: var(--ground); min-height: 1em; }
+.form-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 8px; }
+.form-foot small { font-size: 12px; color: var(--sage); max-width: 46ch; }
+.days { list-style: none; margin: 44px 0 0; padding: 0; display: grid; gap: 4px; }
+.day { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); background: var(--paper); scroll-margin-top: 96px; }
+.day figure { margin: 0; position: relative; min-height: 300px; overflow: hidden; background: var(--midnight); }
+.day figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.day figcaption, .type figcaption { position: absolute; left: 10px; bottom: 10px; max-width: calc(100% - 20px); font-size: 11px; line-height: 1.3; color: var(--light); background: rgba(15,30,45,.62); padding: 3px 8px; }
+.day-b { padding: clamp(22px, 3vw, 36px); display: grid; gap: 12px; align-content: start; min-width: 0; }
+.day-when { margin: 0; font: 600 11px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+.day h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 3vw, 34px); line-height: 1.05; }
+.day-leg { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+.day-leg b { font-weight: 600; color: var(--midnight); }
+.day p.t { margin: 0; font-family: var(--serif); font-size: 17.5px; line-height: 1.45; max-width: 60ch; }
+.day ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--ink-soft); display: grid; gap: 4px; }
+.day-sleep { margin: 4px 0 0; display: flex; gap: 10px; align-items: center; font-size: 13.5px; border-top: 1px solid var(--line); padding-top: 14px; }
+.day-sleep .ico { width: 20px; height: 20px; color: var(--red); flex: none; }
+@media (max-width: 760px) { .day { grid-template-columns: 1fr; } .day figure { min-height: 0; aspect-ratio: 16 / 10; } }
+.type { padding: 0; gap: 0; }
+.type figure { margin: 0; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--midnight); }
+.type figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.type-b { padding: clamp(22px, 3vw, 32px); display: grid; gap: 10px; align-content: start; }
+.book-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn-ghost-l { color: var(--light); border-color: rgba(236,237,232,.5); }
+.btn-ghost-l:hover { background: rgba(236,237,232,.1); }
+.book-note { margin-top: 14px; font-size: 13px; color: var(--sage); max-width: 60ch; }
+.conds { margin-top: 32px; border-top: 1px solid rgba(236,237,232,.18); }
+.conds summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 18px 0; font: 600 12px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ground); }
+.conds summary::-webkit-details-marker { display: none; }
+.conds summary .pm { width: 26px; height: 26px; border: 1px solid var(--sage); border-radius: 50%; position: relative; transition: transform .25s; }
+.conds summary .pm::before, .conds summary .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 1px; background: var(--light); transform: translate(-50%,-50%); }
+.conds summary .pm::after { transform: translate(-50%,-50%) rotate(90deg); }
+.conds[open] summary .pm { transform: rotate(45deg); }
+.conds-body h4 { font: 600 12px/1.3 var(--sans); letter-spacing: .06em; color: var(--light); margin: 18px 0 6px; }
+.conds-body p { font-size: 14px; line-height: 1.6; color: rgba(236,237,232,.82); margin: 0; max-width: 70ch; }
+.book-done { border: 1px solid var(--ground); padding: clamp(24px, 4vw, 40px); }
+.book-done h3 { font-family: var(--serif); font-weight: 400; font-size: 34px; }
+.book-done h3 em { color: var(--ground); }
+.book-done p { font-family: var(--serif); font-size: 18px; margin-top: 12px; color: rgba(236,237,232,.88); }
+.book-done .demo { margin-top: 18px; font-size: 12px; color: var(--sage); }
+@media (max-width: 960px) { .reserve { grid-template-columns: 1fr; } .price-card { position: static; } }
+@media (max-width: 560px) { form.book { grid-template-columns: 1fr; } }
+
+/* Closing + footer */
+.closing { position: relative; color: var(--light); overflow: hidden; background: var(--midnight); }
+.closing img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55; }
+.closing .wrap { position: relative; z-index: 1; padding-block: clamp(96px, 14vw, 180px); display: grid; gap: 22px; justify-items: start; }
+.closing h2 { font-size: clamp(42px, 6vw, 80px); line-height: 1; }
+.closing h2 em { color: var(--ground); display: block; }
+.closing .buen { font-family: var(--serif); font-style: italic; font-size: clamp(28px, 3vw, 40px); color: var(--ground); }
+footer { background: var(--midnight); color: var(--light); border-top: 1px solid rgba(236,237,232,.12); padding-block: 56px 96px; }
+footer .wrap { display: grid; grid-template-columns: 1.2fr repeat(3, minmax(0, 1fr)); gap: 32px; font-size: 13px; }
+footer img { height: 40px; width: auto; }
+footer h4 { margin: 0 0 12px; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--sage); }
+footer p { line-height: 1.7; color: rgba(236,237,232,.8); }
+@media (max-width: 760px) { footer .wrap { grid-template-columns: 1fr 1fr; } }
+.split-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; }
+.draft { position: fixed; right: 14px; top: 88px; z-index: 29; background: var(--ground); color: var(--midnight); font-size: 11px; font-weight: 600; letter-spacing: .08em; padding: 6px 10px; text-transform: uppercase; }
+
+/* Map itinerary */
+.mapbox { margin-top: 44px; background: var(--paper); border: 1px solid var(--line); }
+.map-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.map-svg { width: 100%; height: auto; display: block; }
+@media (max-width: 700px) { .map-svg { width: 760px; max-width: none; } .map-scroll::after { content: "Desliza el mapa →"; display: block; padding: 0 18px 10px; font-size: 11px; letter-spacing: .08em; color: var(--ink-soft); } }
+.map-svg .contour { fill: none; stroke: var(--line); stroke-width: 1; opacity: .7; }
+.map-svg .river { fill: none; stroke: #9DB0B9; stroke-width: 2.2; opacity: .55; }
+.map-svg .river-l { font: italic 13px var(--serif); fill: #6E8792; }
+.map-svg .seg { fill: none; stroke: var(--sage); stroke-width: 3; stroke-dasharray: 2 7; stroke-linecap: round; }
+.map-svg .seg-on { fill: none; stroke: var(--red); stroke-width: 3.5; stroke-linecap: round; transition: stroke-dashoffset .7s ease; }
+.map-svg .stop { cursor: pointer; }
+.map-svg .stop circle.halo { fill: var(--red); opacity: 0; transition: opacity .3s, r .3s; }
+.map-svg .stop circle.pt { fill: var(--light); stroke: var(--midnight); stroke-width: 1.6; transition: fill .3s, stroke .3s; }
+.map-svg .stop.done circle.pt { fill: var(--red); stroke: var(--red); }
+.map-svg .stop.on circle.pt { fill: var(--red); stroke: var(--light); stroke-width: 3; }
+.map-svg .stop.on circle.halo { opacity: .18; }
+.map-svg .stop text.nm { font: 400 21px var(--serif); fill: var(--midnight); }
+.map-svg .stop text.km { font: 600 10px var(--sans); letter-spacing: .12em; fill: var(--red); }
+.map-svg .stop:hover text.nm, .map-svg .stop:focus-visible text.nm { text-decoration: underline; }
+.map-svg .stop:focus { outline: none; }
+.map-svg .stop:focus-visible circle.pt { stroke: var(--red); stroke-width: 3; }
+.map-svg .meta { font: 600 10px var(--sans); letter-spacing: .14em; fill: var(--ink-soft); }
+.map-svg .gal { font: italic 64px var(--serif); fill: var(--midnight); opacity: .06; }
+.daybar { display: flex; gap: 4px; padding: 0 18px 18px; overflow-x: auto; }
+.daybar button { flex: 1 0 auto; min-width: 86px; background: transparent; border: 1px solid var(--line); padding: 10px 12px; text-align: left; cursor: pointer; font-family: var(--sans); color: var(--midnight); transition: background .2s, border-color .2s; }
+.daybar button b { display: block; font: 600 10px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+.daybar button span { display: block; font-family: var(--serif); font-size: 15px; margin-top: 5px; white-space: nowrap; }
+.daybar button[aria-pressed="true"] { background: var(--midnight); border-color: var(--midnight); color: var(--light); }
+.daybar button[aria-pressed="true"] b { color: var(--ground); }
+.stopcard { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 0; margin-top: 4px; background: var(--midnight); color: var(--light); min-height: 420px; }
+.stopcard figure { margin: 0; position: relative; overflow: hidden; min-height: 300px; background: #1b2b3b; }
+.stopcard figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .35s, transform 1.2s ease; }
+.stopcard figure figcaption { position: absolute; left: 14px; bottom: 12px; font-size: 11px; letter-spacing: .06em; color: rgba(236,237,232,.85); background: rgba(15,30,45,.55); padding: 4px 8px; }
+.stop-info { padding: clamp(24px, 4vw, 44px); display: grid; gap: 14px; align-content: start; min-width: 0; }
+.stop-day { font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ground); }
+.stop-name { font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 4.4vw, 56px); line-height: 1; }
+.stop-leg { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--sage); }
+.stop-leg b { color: var(--light); font-weight: 600; }
+.stop-txt { font-family: var(--serif); font-size: 18px; line-height: 1.45; color: rgba(236,237,232,.9); max-width: 56ch; }
+.stop-see h4 { margin: 6px 0 8px; font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--sage); }
+.stop-see ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.stop-see li { font-family: var(--serif); font-size: 17px; padding-left: 18px; position: relative; }
+.stop-see li::before { content: ""; position: absolute; left: 0; top: .65em; width: 8px; height: 1px; background: var(--ground); }
+.stop-sleep { display: flex; align-items: center; gap: 12px; border-top: 1px solid rgba(236,237,232,.15); padding-top: 14px; font-size: 14px; }
+.stop-sleep .ico { color: var(--ground); }
+.stop-nav { display: flex; gap: 8px; margin-top: 4px; }
+.stop-nav button { color: var(--light); border-color: rgba(236,237,232,.4); padding: 11px 16px; }
+.stop-nav button:disabled { opacity: .35; cursor: default; }
+@media (max-width: 860px) { .stopcard { grid-template-columns: 1fr; } .stopcard figure { aspect-ratio: 16/10; min-height: 0; } }
+
+/* Night by night */
+.types { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-top: 40px; }
+.type { background: var(--light); padding: clamp(22px, 3vw, 32px); display: grid; gap: 10px; align-content: start; min-width: 0; }
+.type h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.05; }
+.type h3 em { color: var(--red); }
+.type p { font-family: var(--serif); font-size: 17px; line-height: 1.38; color: var(--ink-soft); }
+.nights { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; margin-top: 4px; }
+.night { background: var(--midnight); color: var(--light); padding: 18px 14px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.night b { font: 600 10px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ground); }
+.night .pl { font-family: var(--serif); font-size: 20px; line-height: 1.05; }
+.night .ty { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--sage); }
+.night .ty .ico { width: 20px; height: 20px; color: var(--ground); }
+.stay-note { margin-top: 16px; font-size: 13px; color: var(--ink-soft); }
+@media (max-width: 960px) { .nights { grid-template-columns: repeat(2, minmax(0, 1fr)); } .types { grid-template-columns: 1fr; } }
+.pack-note { font-size: 12px; color: var(--ink-soft); margin: -8px 0 14px; }
+.team { margin-top: 40px; border-top: 1px solid rgba(236,237,232,.2); padding-top: 28px; }
+.team h3 { font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--sage); }
+.team .tcount { font-family: var(--serif); font-size: 28px; margin-top: 10px; }
+.team-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 4px; }
+.team-list li { background: rgba(236,237,232,.06); padding: 12px 14px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) auto; gap: 12px; font-size: 13px; align-items: center; }
+.team-list li b { font-weight: 600; }
+.team-list li span { color: rgba(236,237,232,.75); overflow-wrap: anywhere; }
+.team-list li em { font-style: normal; font-size: 11px; color: var(--ground); white-space: nowrap; }
+@media (max-width: 600px) { .team-list li { grid-template-columns: 1fr; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-shell" viewBox="0 0 24 24"><path d="M3.5 10.5a8.5 6.5 0 0 1 17 0"/><path d="M3.5 10.5 12 20l8.5-9.5"/><path d="M12 20 6.2 6.6M12 20 9 4.4M12 20V4M12 20l3-15.6M12 20l5.8-13.4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v15M6 13l6 6 6-6"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="8.5" cy="8" r="2.8"/><circle cx="16" cy="8" r="2.8"/><path d="M3 19c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5M12.5 14.4c1-.3 2.1-.4 3.5-.4 2.7 0 4.9 1.7 5.5 5"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4H6.5A2.5 2.5 0 0 1 4 13.5z"/><path d="M8.5 10h.01M12 10h.01M15.5 10h.01"/></symbol>
+    <symbol id="i-steps" viewBox="0 0 24 24"><path d="M7 4.5c1.6 0 2.4 2 2.4 4.2S8.6 12 7.2 12 4.8 10.6 4.8 8.6 5.5 4.5 7 4.5zM6.2 14.5h2.4v2.2a1.2 1.2 0 0 1-2.4 0zM16.8 7.5c1.5 0 2.3 2 2.3 4.2s-.8 3.4-2.2 3.4-2.4-1.4-2.4-3.4.8-4.2 2.3-4.2zM15.6 17.5h2.4v2.2a1.2 1.2 0 0 1-2.4 0z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.8 2.5 5.2 5.6.7-4.1 3.9 1 5.6-5-2.7-5 2.7 1-5.6-4.1-3.9 5.6-.7z"/></symbol>
+    <symbol id="i-glass" viewBox="0 0 24 24"><path d="M7.5 3.5h9c0 4.8-1.8 8-4.5 8s-4.5-3.2-4.5-8zM12 11.5V19M8.5 20h7"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 18.5h18M4 8v10.5M4 14.5h16v4M6.5 11h3.5v3.5H6.5zM11.5 11.5h7.5l1 3"/></symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24"><path d="M5 10h11v5.5A3.5 3.5 0 0 1 12.5 19h-4A3.5 3.5 0 0 1 5 15.5zM16 11.5h1.2a2.3 2.3 0 0 1 0 4.6H16M8 4.5c-.7.8.7 1.6 0 2.5M11 4c-.7.9.7 1.8 0 2.8M14 4.5c-.7.8.7 1.6 0 2.5"/></symbol>
+    <symbol id="i-suitcase" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11.5" rx="1.8"/><path d="M9 8V5.5h6V8M8.5 8.5v10.5M15.5 8.5v10.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><rect x="6" y="3.5" width="13" height="17" rx="1"/><path d="M8.5 4v16M11.5 8.5h5M11.5 12h5M11.5 15.5h3.5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5 19 6.3l-.8 7.6L12 20.5l-6.2-6.6L5 6.3z"/><path d="m9 12 2.2 2.2L15.5 10"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M3.5 16v-4.5L6.7 8h10.8l3 3.5V16zM3.5 11.5h17M12 8v3.5"/><circle cx="7.5" cy="16.5" r="1.8"/><circle cx="16.5" cy="16.5" r="1.8"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10.5 18h3"/></symbol>
+    <symbol id="i-rain" viewBox="0 0 24 24"><path d="M7 15.5a3.5 3.5 0 0 1-.3-7A5 5 0 0 1 16.4 8a3.8 3.8 0 0 1 .6 7.5z"/><path d="m8.5 18-1 2.5M12 18l-1 2.5M15.5 18l-1 2.5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.6"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/></symbol>
+    <symbol id="i-shoe" viewBox="0 0 24 24"><path d="M3.5 17.5V9.8c1.8.4 3.4.2 4.5-.8l1.8 2.4c1.6 2 4.3 2.6 7 3.1 2 .4 3.7 1.3 3.7 3z"/><path d="M3.5 17.5h17M10.5 12.3l1.5-1.2M12.5 13.4l1.3-1.1"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 19.5s-7.5-4.4-7.5-9.8A4.2 4.2 0 0 1 12 7.2a4.2 4.2 0 0 1 7.5 2.5c0 5.4-7.5 9.8-7.5 9.8z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6.5 3.5h7.5l4 4v13h-11.5zM14 3.5v4h4M9 12h6M9 15.5h6"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12.5" rx="1.8"/><path d="M3 10h18M6.5 15h4"/></symbol>
+    <symbol id="i-hotel" viewBox="0 0 24 24"><path d="M5 20.5V4.5h14v16M3 20.5h18M9 8h1.5M13.5 8H15M9 11.5h1.5M13.5 11.5H15M9 15h1.5M13.5 15H15M10.5 20.5v-3h3v3"/></symbol>
+    <symbol id="i-pazo" viewBox="0 0 24 24"><path d="M3 20.5h18M4.5 20.5v-9l5-3.5 5 3.5v9M14.5 20.5V8.5h5v12M14.5 8.5l2.5-3 2.5 3M8 20.5v-4h3v4M7 13h.01M12 13h.01"/></symbol>
+    <symbol id="i-house" viewBox="0 0 24 24"><path d="M3.5 11 12 4l8.5 7M6 9.5v11h12v-11M10 20.5v-5h4v5"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6"/></symbol>
+  </defs>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a href="#inicio" aria-label="Evermind, inicio"><img class="logo-l" src="img/logo_completo_light.png" alt="Evermind"><img class="logo-d" src="img/logo_completo_midnight.png" alt="Evermind"></a>
+    <nav aria-label="Secciones">
+      <a href="#experiencia">La experiencia</a>
+      <a href="#itinerario">Itinerario</a>
+      <a href="#incluye">Qué incluye</a>
+      <a href="#preparate">Prepárate</a>
+      <a href="#preguntas">Preguntas</a>
+      <a class="btn btn-solid" href="#reserva">Reserva tu plaza</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="rail" id="rail" aria-label="Tu recorrido por la página">
+  <span class="fill" id="railFill"></span>
+  <ol>
+    <li data-for="experiencia"><a href="#experiencia"><span class="dot"></span><span class="lbl">Sarria · km 116</span></a></li>
+    <li data-for="itinerario"><a href="#itinerario"><span class="dot"></span><span class="lbl">Portomarín · km 94</span></a></li>
+    <li data-for="incluye"><a href="#incluye"><span class="dot"></span><span class="lbl">Palas de Rei · km 69</span></a></li>
+    <li data-for="acompanamos"><a href="#acompanamos"><span class="dot"></span><span class="lbl">Melide · km 53</span></a></li>
+    <li data-for="preparate"><a href="#preparate"><span class="dot"></span><span class="lbl">Arzúa · km 39</span></a></li>
+    <li data-for="preguntas"><a href="#preguntas"><span class="dot"></span><span class="lbl">O Pedrouzo · km 20</span></a></li>
+    <li data-for="reserva"><a href="#reserva"><span class="dot"></span><span class="lbl">Santiago · km 0</span></a></li>
+  </ol>
+</nav>
+<div class="progress" id="progress" aria-hidden="true"><b id="progPlace">Sarria · km 116</b><span class="bar"><i id="progBar"></i></span><a href="#reserva">Reservar</a></div>
+
+<main id="inicio">
+  <!-- HERO -->
+  <section class="hero">
+    <img src="img/hero.jpg" alt="Un grupo de peregrinos llega caminando a Santiago al atardecer, con las torres de la Catedral al fondo">
+    <div class="wrap">
+      <p class="eyebrow">Evermind × Club eXpats</p>
+      <h1>El Camino de Santiago <em>Edición Club eXpats</em></h1>
+      <p class="lead">Caminar, compartir y tener tiempo para ti.</p>
+      <div class="meta">
+        <span><svg class="ico"><use href="#i-cal"/></svg>8–15 junio 2027</span>
+        <span><svg class="ico"><use href="#i-pin"/></svg>Sarria → Santiago · 116 km</span>
+        <span><svg class="ico"><use href="#i-people"/></svg>Grupo de 10 a 12</span>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-solid" href="#reserva">Reserva tu plaza <svg class="ico"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#experiencia">Empieza el recorrido <svg class="ico"><use href="#i-down"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 · SARRIA: LA EXPERIENCIA -->
+  <section class="section" id="experiencia" data-km="116" data-place="Sarria">
+    <div class="wrap">
+      <div class="mojon"><span class="mojon-stone"><svg class="ico"><use href="#i-shell"/></svg></span><span class="mojon-txt"><span class="mojon-km">Km 116</span><span class="mojon-place">Sarria · empieza el Camino</span></span></div>
+      <div class="statement">
+        <h2>Ocho días para caminar a tu ritmo, compartir y regalarte <em>tiempo.</em></h2>
+        <p class="body">Un grupo pequeño, 116 km por la Galicia rural y la tranquilidad de tenerlo todo resuelto: alojamientos, maletas y organización. Tú caminas; del resto nos ocupamos nosotros.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>116 km</b><span>De Sarria a Santiago, el tramo más recorrido del Camino Francés</span></div>
+        <div class="stat"><b>6 etapas</b><span>De 14 a 25 km al día, casi todas llanas</span></div>
+        <div class="stat"><b>2027</b><span>Año Santo Jacobeo, uno de los años más especiales del Camino</span></div>
+        <div class="stat"><b>10–12</b><span>Personas, un grupo pequeño para conocernos</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap who">
+      <div>
+        <p class="eyebrow" style="color:var(--red)">Para quién</p>
+        <h2 class="h2" style="margin-top:14px">Un viaje <em>para reconectar y compartir</em></h2>
+        <p class="body" style="margin-top:20px">Para personas que quieren vivir el Camino con calma, en buena compañía y con todo organizado. Para grupos o de forma individual. No hace falta ser del Club eXpats.</p>
+        <div class="gains">
+          <div class="gain"><span class="ico-ring"><svg class="ico"><use href="#i-compass"/></svg></span><div><h3>Tiempo para ti</h3><p>Unos días lejos de la rutina para pensar, respirar y escucharte.</p></div></div>
+          <div class="gain"><span class="ico-ring"><svg class="ico"><use href="#i-chat"/></svg></span><div><h3>Buena compañía</h3><p>Conversaciones y momentos compartidos.</p></div></div>
+          <div class="gain"><span class="ico-ring"><svg class="ico"><use href="#i-steps"/></svg></span><div><h3>Bienestar</h3><p>Caminar entre bosques y aldeas: cuerpo activo, mente tranquila y buen descanso.</p></div></div>
+          <div class="gain"><span class="ico-ring"><svg class="ico"><use href="#i-star"/></svg></span><div><h3>Una historia compartida</h3><p>Llegar juntos a la Plaza del Obradoiro será parte de nuestra historia.</p></div></div>
+        </div>
+      </div>
+      <div class="who-photo"><img src="img/quien.jpg" alt="Retrato de una mujer con los ojos cerrados al sol y al viento"></div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--sage)">La experiencia</p>
+      <h2 class="h2" style="margin-top:14px">Tres cosas, <em>bien hechas</em></h2>
+      <div class="trio">
+        <article class="moment"><img src="img/caminar.jpg" alt="Puente de piedra sobre un río entre bosques de Galicia"><div class="moment-txt"><svg class="ico"><use href="#i-steps"/></svg><h3>Caminar</h3><p>Seis etapas entre bosques, aldeas y puentes medievales. Nosotros nos ocupamos de tu maleta.</p></div></article>
+        <article class="moment"><img src="img/conversar.jpg" alt="Peregrinas caminando hacia Santiago con la ciudad al fondo"><div class="moment-txt"><svg class="ico"><use href="#i-chat"/></svg><h3>Compartir</h3><p>Momentos guiados por Evermind y el cuaderno del Camino para pensar, escribir y conversar.</p></div></article>
+        <article class="moment"><img src="img/celebrar.jpg" alt="La Catedral de Santiago y la Plaza del Obradoiro llenas de peregrinos"><div class="moment-txt"><svg class="ico"><use href="#i-glass"/></svg><h3>Disfrutar</h3><p>Experiencia gastronómica y cultural. Cena de bienvenida en Sarria y cena de despedida en Santiago, con el Camino ya hecho.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · PORTOMARÍN: ITINERARIO (mapa interactivo) -->
+  <section class="section" id="itinerario" data-km="94" data-place="Portomarín">
+    <div class="wrap">
+      <div class="mojon"><span class="mojon-stone"><svg class="ico"><use href="#i-shell"/></svg></span><span class="mojon-txt"><span class="mojon-km">Km 94</span><span class="mojon-place">Portomarín</span></span></div>
+      <div class="split-head">
+        <h2 class="h2">Ocho días, <em>seis etapas</em></h2>
+        <p class="body" style="max-width:42ch">De martes a martes: llegada, seis etapas a pie y despedida en Santiago. Toca una parada del mapa para ir a ese día.</p>
+      </div>
+      <div class="mapbox">
+        <div class="map-scroll"><svg class="map-svg" id="map" viewBox="0 0 1000 340" role="group" aria-label="Mapa del recorrido de Sarria a Santiago">
+          <text class="gal" x="40" y="318">Galicia</text>
+          <g id="contours"></g>
+          <path class="river" d="M742 18 C 752 80, 736 140, 760 200 S 748 300, 766 340"/>
+          <text class="river-l" x="772" y="64">Río Miño</text>
+          <g id="segs"></g>
+          <g id="stops"></g>
+          <g transform="translate(930 40)"><path d="M0 18 L6 0 L12 18 L6 13 Z" fill="var(--midnight)"/><text class="meta" x="2" y="34">N</text></g>
+          <g transform="translate(40 30)"><line x1="0" y1="0" x2="87" y2="0" stroke="var(--midnight)" stroke-width="1.5"/><line x1="0" y1="-4" x2="0" y2="4" stroke="var(--midnight)"/><line x1="87" y1="-4" x2="87" y2="4" stroke="var(--midnight)"/><text class="meta" x="0" y="20">10 KM</text></g>
+        </svg></div>
+      </div>
+      <ol class="days">
+        <li class="day" id="dia-1"><figure><img src="img/r_sarria.jpg" alt="Igrexa de San Salvador, Sarria" loading="lazy"><figcaption>Igrexa de San Salvador, Sarria · Foto: José Antonio Gil Martínez, CC BY 2.0</figcaption></figure><div class="day-b"><p class="day-when">Día 1 · Martes 8 de junio</p><h3>Llegada a Sarria</h3><p class="day-leg"><b>Bienvenida y cena de grupo</b></p><p class="t">Aquí empieza todo. Sarria es el punto de partida de miles de peregrinos por estar justo antes de los últimos 100 km. Su casco antiguo sube en cuesta por la Rúa Maior, con iglesias medievales y el convento de la Magdalena. Por la noche, cena de bienvenida para conocernos.</p><ul><li>Un paseo por la Rúa Maior al atardecer</li><li>El primer sello en tu credencial</li></ul><p class="day-sleep"><svg class="ico"><use href="#i-hotel"/></svg>Dormimos en: Hotel 4* en Sarria</p></div></li>
+        <li class="day" id="dia-2"><figure><img src="img/r_portomarin.jpg" alt="Portomarín" loading="lazy"><figcaption>Portomarín · Foto: Satna, CC BY-SA 4.0</figcaption></figure><div class="day-b"><p class="day-when">Día 2 · Miércoles 9 de junio</p><h3>Sarria → Portomarín</h3><p class="day-leg"><b>22,8 km</b> · faltan 94 km a Santiago</p><p class="t">Un pueblo trasladado piedra a piedra en los años sesenta, cuando el embalse de Belesar cubrió el antiguo. Se llega cruzando un largo puente sobre el Miño. A mitad de etapa pasarás junto al mojón del kilómetro 100.</p><ul><li>La iglesia-fortaleza de San Nicolás, reconstruida en la plaza</li><li>Las vistas del embalse desde lo alto</li></ul><p class="day-sleep"><svg class="ico"><use href="#i-hotel"/></svg>Dormimos en: Hotel 3* en Portomarín</p></div></li>
+        <li class="day" id="dia-3"><figure><img src="img/r_palas.jpg" alt="Igrexa de San Tirso, Palas de Rei" loading="lazy"><figcaption>Igrexa de San Tirso, Palas de Rei · Foto: Mentxuwiki, CC BY-SA 4.0</figcaption></figure><div class="day-b"><p class="day-when">Día 3 · Jueves 10 de junio</p><h3>Portomarín → Palas de Rei</h3><p class="day-leg"><b>25 km</b> · la etapa más larga</p><p class="t">La etapa más larga del viaje y también una de las más rurales: prados, robles y aldeas donde el tiempo va más despacio. Palas de Rei debe su nombre, según la tradición, a un antiguo palacio real.</p><ul><li>La iglesia de San Tirso</li><li>El castillo medieval de Pambre, en los alrededores</li></ul><p class="day-sleep"><svg class="ico"><use href="#i-house"/></svg>Dormimos en: Casa rural en las afueras, con traslado</p></div></li>
+        <li class="day" id="dia-4"><figure><img src="img/r_melide.jpg" alt="Ponte de Furelos, Melide" loading="lazy"><figcaption>Ponte de Furelos, Melide · Foto: Mentxuwiki, CC BY-SA 4.0</figcaption></figure><div class="day-b"><p class="day-when">Día 4 · Viernes 11 de junio</p><h3>Palas de Rei → Melide</h3><p class="day-leg"><b>15,2 km</b> · faltan 53 km</p><p class="t">Aquí el Camino Primitivo se une al Francés. Antes de llegar cruzarás el puente medieval de Furelos. Melide es famoso en toda Galicia por su pulpo á feira.</p><ul><li>Comer pulpo en una de sus pulperías</li><li>El puente medieval de Furelos</li></ul><p class="day-sleep"><svg class="ico"><use href="#i-hotel"/></svg>Dormimos en: Hotel 3* en Melide</p></div></li>
+        <li class="day" id="dia-5"><figure><img src="img/r_arzua.jpg" alt="Ribadiso da Baixo, Arzúa" loading="lazy"><figcaption>Ribadiso da Baixo, Arzúa · Foto: José Antonio Gil Martínez, CC BY 2.0</figcaption></figure><div class="day-b"><p class="day-when">Día 5 · Sábado 12 de junio</p><h3>Melide → Arzúa</h3><p class="day-leg"><b>14,3 km</b> · faltan 39 km</p><p class="t">Una etapa corta entre bosques y valles de río, como el de Ribadiso, con su puente y su albergue de piedra. Arzúa es tierra de queso: el Arzúa-Ulloa tiene denominación de origen. Aquí se suma el Camino del Norte.</p><ul><li>Probar el queso de Arzúa</li><li>El puente y el río en Ribadiso</li></ul><p class="day-sleep"><svg class="ico"><use href="#i-pazo"/></svg>Dormimos en: Pazo rural en las afueras, con traslado</p></div></li>
+        <li class="day" id="dia-6"><figure><img src="img/r_pedrouzo.jpg" alt="Capela de Santa Irene, O Pino" loading="lazy"><figcaption>Capela de Santa Irene, O Pino · Foto: Bene Riobó, CC BY-SA 4.0</figcaption></figure><div class="day-b"><p class="day-when">Día 6 · Domingo 13 de junio</p><h3>Arzúa → O Pedrouzo</h3><p class="day-leg"><b>19,2 km</b> · faltan 20 km</p><p class="t">Caminos entre robles y eucaliptos y pequeñas capillas como la de Santa Irene, ya en el municipio de O Pino. Es la última noche antes de Santiago: se nota el ambiente de víspera.</p><ul><li>Caminar entre eucaliptos a primera hora</li><li>Una última cena tranquila antes de la llegada</li></ul><p class="day-sleep"><svg class="ico"><use href="#i-pazo"/></svg>Dormimos en: Pazo y casa rural cercanos, con traslado</p></div></li>
+        <li class="day" id="dia-7"><figure><img src="img/r_obradoiro.jpg" alt="Fachada do Obradoiro, Santiago" loading="lazy"><figcaption>Fachada do Obradoiro, Santiago · Foto: Stegop, CC BY-SA 4.0</figcaption></figure><div class="day-b"><p class="day-when">Día 7 · Lunes 14 de junio</p><h3>O Pedrouzo → Santiago</h3><p class="day-leg"><b>19,9 km</b> · llegada a la Catedral</p><p class="t">Desde el Monte do Gozo se ven por primera vez las torres de la Catedral. Después, la llegada a la Plaza del Obradoiro y la Compostela en la Oficina del Peregrino. Por la noche, cena de despedida, con el Camino ya hecho.</p><ul><li>La llegada a la Plaza del Obradoiro</li><li>Recoger tu Compostela</li></ul><p class="day-sleep"><svg class="ico"><use href="#i-hotel"/></svg>Dormimos en: Hotel 4* en el centro de Santiago</p></div></li>
+        <li class="day" id="dia-8"><figure><img src="img/r_santiago8.jpg" alt="Botafumeiro, Catedral de Santiago" loading="lazy"><figcaption>Botafumeiro, Catedral de Santiago · Foto: juantiagues, CC BY-SA 2.0</figcaption></figure><div class="day-b"><p class="day-when">Día 8 · Martes 15 de junio</p><h3>Santiago</h3><p class="day-leg"><b>Desayuno, cierre del grupo y despedida</b></p><p class="t">Último desayuno juntas y un rato para cerrar el viaje en grupo. Después, cada una sigue su camino. Si quieres quedarte unos días más en Santiago, te ayudamos a organizarlo.</p><ul><li>La Misa del Peregrino en la Catedral</li><li>Un paseo por la Rúa do Franco y el Mercado de Abastos</li></ul><p class="day-sleep"><svg class="ico"><use href="#i-shell"/></svg>Fin del viaje · Buen Camino</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 3 · PALAS DE REI: DORMIR + INCLUYE -->
+  <section class="section" id="incluye" data-km="69" data-place="Palas de Rei" style="background:var(--paper)">
+    <div class="wrap">
+      <div class="mojon"><span class="mojon-stone"><svg class="ico"><use href="#i-shell"/></svg></span><span class="mojon-txt"><span class="mojon-km">Km 69</span><span class="mojon-place">Palas de Rei</span></span></div>
+      <div class="split-head">
+        <h2 class="h2">Dónde <em>dormimos</em></h2>
+        <p class="body" style="max-width:46ch">Habitación individual con baño privado y desayuno (si prefieres compartir, te damos el precio en doble). El grupo duerme junto casi todas las noches; si el alojamiento está fuera del pueblo, el traslado está incluido.</p>
+      </div>
+      <div class="types">
+        <div class="type"><figure><img src="img/r_hotel.jpg" alt="Habitación de hotel con muro de piedra" loading="lazy"><figcaption>Imagen ilustrativa · Unsplash</figcaption></figure><div class="type-b"><span class="ico-ring"><svg class="ico"><use href="#i-hotel"/></svg></span><h3>Hoteles de <em>3 y 4 estrellas</em></h3><p>En el centro de Sarria, Portomarín, Melide y Santiago, a pie de Camino.</p></div></div>
+        <div class="type"><figure><img src="img/r_pazo.jpg" alt="Pazo gallego de piedra con jardín" loading="lazy"><figcaption>Pazo de Oca (referencia) · Foto: Miguel Hermoso Cuesta, CC BY-SA 4.0</figcaption></figure><div class="type-b"><span class="ico-ring"><svg class="ico"><use href="#i-pazo"/></svg></span><h3>Pazos <em>gallegos</em></h3><p>Casas señoriales de piedra en el campo, con jardín y mucha historia. Dos noches, cerca de Arzúa y O Pedrouzo.</p></div></div>
+        <div class="type"><figure><img src="img/r_rural.jpg" alt="Casa rural de piedra en una aldea gallega" loading="lazy"><figcaption>Foto: Javier Balseiro · Unsplash</figcaption></figure><div class="type-b"><span class="ico-ring"><svg class="ico"><use href="#i-house"/></svg></span><h3>Casas <em>rurales</em></h3><p>Alojamientos pequeños y cuidados en aldeas tranquilas, para dormir de verdad.</p></div></div>
+      </div>
+      <div class="nights">
+        <div class="night"><b>Noche 1</b><span class="pl">Sarria</span><span class="ty"><svg class="ico"><use href="#i-hotel"/></svg>Hotel 4*</span></div>
+        <div class="night"><b>Noche 2</b><span class="pl">Portomarín</span><span class="ty"><svg class="ico"><use href="#i-hotel"/></svg>Hotel 3*</span></div>
+        <div class="night"><b>Noche 3</b><span class="pl">Palas de Rei</span><span class="ty"><svg class="ico"><use href="#i-house"/></svg>Casa rural</span></div>
+        <div class="night"><b>Noche 4</b><span class="pl">Melide</span><span class="ty"><svg class="ico"><use href="#i-hotel"/></svg>Hotel 3*</span></div>
+        <div class="night"><b>Noche 5</b><span class="pl">Arzúa</span><span class="ty"><svg class="ico"><use href="#i-pazo"/></svg>Pazo rural</span></div>
+        <div class="night"><b>Noche 6</b><span class="pl">O Pedrouzo</span><span class="ty"><svg class="ico"><use href="#i-pazo"/></svg>Pazo y casa rural</span></div>
+        <div class="night"><b>Noche 7</b><span class="pl">Santiago</span><span class="ty"><svg class="ico"><use href="#i-hotel"/></svg>Hotel 4*</span></div>
+      </div>
+      <p class="stay-note">Tipo de alojamiento orientativo. Los alojamientos concretos los confirma Viajes Mundiplus, agencia oficial del Camino, al cerrar el grupo.</p>
+      <div class="incl">
+        <div class="incl-yes">
+          <h3>Qué incluye</h3>
+          <ul>
+            <li><svg class="ico"><use href="#i-bed"/></svg>7 noches en habitación individual con baño</li>
+            <li><svg class="ico"><use href="#i-cup"/></svg>Desayuno diario</li>
+            <li><svg class="ico"><use href="#i-glass"/></svg>Cena de bienvenida y cena de despedida</li>
+            <li><svg class="ico"><use href="#i-suitcase"/></svg>Traslado de maletas entre etapas</li>
+            <li><svg class="ico"><use href="#i-book"/></svg>Cuaderno Evermind del Camino</li>
+            <li><svg class="ico"><use href="#i-people"/></svg>Acompañante del grupo todo el viaje</li>
+            <li><svg class="ico"><use href="#i-shield"/></svg>Seguro de asistencia en viaje</li>
+            <li><svg class="ico"><use href="#i-car"/></svg>Teléfono y vehículo de asistencia en ruta</li>
+            <li><svg class="ico"><use href="#i-shell"/></svg>Credencial y vieira del peregrino</li>
+            <li><svg class="ico"><use href="#i-cal"/></svg>Sesión online de preparación</li>
+          </ul>
+        </div>
+        <div class="incl-no">
+          <h3>No incluye</h3>
+          <ul>
+            <li>Vuelos hasta Santiago</li>
+            <li>Traslado del aeropuerto a Sarria</li>
+            <li>Comidas y cenas libres</li>
+            <li>Bebidas y gastos personales</li>
+            <li>Seguro de cancelación (recomendado)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · MELIDE: ACOMPAÑAMIENTO + ANFITRIONES -->
+  <section class="section dark" id="acompanamos" data-km="53" data-place="Melide">
+    <div class="wrap">
+      <div class="method">
+        <div>
+          <div class="mojon"><span class="mojon-stone"><svg class="ico"><use href="#i-shell"/></svg></span><span class="mojon-txt"><span class="mojon-km">Km 53</span><span class="mojon-place">Melide</span></span></div>
+          <p class="eyebrow" style="color:var(--sage);margin-bottom:12px">Cómo te acompañamos</p>
+          <h2 class="h2">Para aprovechar el Camino <em>al máximo</em></h2>
+          <ol class="steps">
+            <li><span class="n">1</span><div><h3>Antes</h3><p>Una conversación contigo, a solas, para entender qué buscas. Después, el dossier de preparación y una sesión de grupo para resolver las últimas dudas.</p></div></li>
+            <li><span class="n">2</span><div><h3>Durante</h3><p>Una persona de confianza acompaña al grupo todo el viaje. Tu cuaderno Evermind trae preguntas para cada etapa y hay algunas conversaciones en grupo, sin obligación.</p></div></li>
+            <li><span class="n">3</span><div><h3>Al llegar</h3><p>Un cierre en Santiago y un reencuentro opcional online semanas después. Cuando caminas con una pregunta y bien acompañada, las respuestas llegan.</p></div></li>
+          </ol>
+        </div>
+        <div class="method-photo"><img src="img/metodo.jpg" alt="Dos personas caminan juntas por un prado al sol"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · ARZÚA: PREPÁRATE -->
+  <section class="section" id="preparate" data-km="39" data-place="Arzúa">
+    <div class="wrap prep">
+      <div class="prep-photo"><img src="img/preparate.jpg" alt="Un caminante con mochila y bastones entre hierba alta"></div>
+      <div>
+        <div class="mojon"><span class="mojon-stone"><svg class="ico"><use href="#i-shell"/></svg></span><span class="mojon-txt"><span class="mojon-km">Km 39</span><span class="mojon-place">Arzúa</span></span></div>
+        <h2 class="h2">Prepárate <em>sin agobios</em></h2>
+        <p class="body" style="margin-top:20px">No hace falta ser deportista. Con unas semanas de paseos y el equipo adecuado, el Camino se disfruta. Te mandamos una guía más completa antes de salir.</p>
+        <div class="tips">
+          <div class="tip"><div class="tip-h"><span class="ico-ring"><svg class="ico"><use href="#i-steps"/></svg></span><h3>Entrena con calma</h3></div><ul><li>Empieza 6 u 8 semanas antes con paseos de una hora.</li><li>Ve subiendo hasta hacer 15 o 20 km seguidos algún fin de semana.</li><li>Entrena con las zapatillas y la mochila que vas a llevar.</li></ul></div>
+          <div class="tip"><div class="tip-h"><span class="ico-ring"><svg class="ico"><use href="#i-shoe"/></svg></span><h3>Cuida los pies</h3></div><ul><li>Calzado de trekking ya usado; nunca lo estrenes en el Camino.</li><li>Calcetines técnicos, sin costuras y bien estirados cada mañana.</li><li>Vaselina en las zonas de roce y para en cuanto notes un punto caliente.</li></ul></div>
+          <div class="tip"><div class="tip-h"><span class="ico-ring"><svg class="ico"><use href="#i-rain"/></svg></span><h3>Junio en Galicia</h3></div><ul><li>Días largos y templados; por la mañana refresca.</li><li>Puede llover: ropa por capas que se seque rápido y chubasquero en la mochila.</li><li>Gorra, protector solar y algo de repelente por si acaso.</li></ul></div>
+          <div class="tip"><div class="tip-h"><span class="ico-ring"><svg class="ico"><use href="#i-heart"/></svg></span><h3>Durante el Camino</h3></div><ul><li>Bebe agua a menudo, aunque no haga calor.</li><li>Tu ritmo es el bueno: cada una camina a su paso.</li><li>Guarda un rato cada tarde para el cuaderno.</li></ul></div>
+        </div>
+        <div class="pack">
+          <div class="pack-head"><h3>Tu <em>mochila</em></h3><span class="pack-count" id="packCount">0 de 12 listos</span></div>
+          <p class="pack-note">Tu lista personal: márcala desde tu móvil mientras haces la maleta. Solo la ves tú y se guarda en tu dispositivo.</p>
+          <div class="pack-list" id="pack">
+            <label><input type="checkbox" id="p1"><span>Zapatillas o botas de trekking ya usadas</span></label>
+            <label><input type="checkbox" id="p2"><span>Mochila de día de 20 a 25 litros</span></label>
+            <label><input type="checkbox" id="p3"><span>Chubasquero o poncho</span></label>
+            <label><input type="checkbox" id="p4"><span>Forro polar o chaqueta ligera</span></label>
+            <label><input type="checkbox" id="p5"><span>3 pares de calcetines técnicos</span></label>
+            <label><input type="checkbox" id="p6"><span>Camisetas técnicas de secado rápido</span></label>
+            <label><input type="checkbox" id="p7"><span>Sandalias o calzado cómodo para la tarde</span></label>
+            <label><input type="checkbox" id="p8"><span>Cantimplora o botella reutilizable</span></label>
+            <label><input type="checkbox" id="p9"><span>Gorra, protector solar y repelente</span></label>
+            <label><input type="checkbox" id="p10"><span>Botiquín: vaselina, apósitos para ampollas, analgésico</span></label>
+            <label><input type="checkbox" id="p11"><span>Pasaporte o DNI y tarjeta sanitaria</span></label>
+            <label><input type="checkbox" id="p12"><span>Bastones (opcional)</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · O PEDROUZO: PREGUNTAS -->
+  <section class="section" id="preguntas" data-km="20" data-place="O Pedrouzo" style="background:var(--paper)">
+    <div class="wrap">
+      <div class="mojon"><span class="mojon-stone"><svg class="ico"><use href="#i-shell"/></svg></span><span class="mojon-txt"><span class="mojon-km">Km 20</span><span class="mojon-place">O Pedrouzo</span></span></div>
+      <h2 class="h2">Preguntas <em>frecuentes</em></h2>
+      <div class="faq-tabs" role="tablist" aria-label="Temas">
+        <button role="tab" id="tab-viaje" aria-selected="true" aria-controls="faq-viaje">El viaje</button>
+        <button role="tab" id="tab-camino" aria-selected="false" aria-controls="faq-camino">El Camino</button>
+        <button role="tab" id="tab-reserva" aria-selected="false" aria-controls="faq-reserva">Reserva y pagos</button>
+      </div>
+      <div class="faq-list" id="faq-viaje" role="tabpanel" aria-labelledby="tab-viaje">
+        <details open><summary>¿Necesito experiencia o estar en forma?<span class="pm"></span></summary><div class="a">No hace falta experiencia. Si puedes caminar dos o tres horas seguidas a buen ritmo, puedes hacer este Camino. Las etapas van de 14 a 25 km y casi todas son llanas. Te enviamos un plan sencillo para prepararte.</div></details>
+        <details><summary>¿Cómo llego a Sarria?<span class="pm"></span></summary><div class="a">Lo habitual es volar a Santiago de Compostela o a A Coruña y seguir en tren o autobús hasta Sarria. Si vienes por Madrid, hay tren y avión hasta Santiago. Te ayudamos a organizarlo y, si quieres, gestionamos vuelos y traslados aparte.</div></details>
+        <details><summary>¿Tengo que cargar con la maleta?<span class="pm"></span></summary><div class="a">No. Tu maleta viaja cada día al siguiente alojamiento (un bulto por persona, hasta 20 kg). Tú caminas solo con una mochila pequeña con agua, chubasquero y lo del día.</div></details>
+        <details><summary>¿Puedo compartir habitación?<span class="pm"></span></summary><div class="a">El precio es en habitación individual con baño. Si quieres compartir con una amiga, dínoslo al reservar y te damos el precio en doble.</div></details>
+        <details><summary>¿Puedo ir sola? ¿Tengo que ser del Club eXpats?<span class="pm"></span></summary><div class="a">Puedes venir sola o con amigas: una parte bonita del Camino es conocer a las demás. Y no hace falta ser del club; el grupo nace en su comunidad, pero puede venir cualquier persona.</div></details>
+        <details><summary>¿Qué pasa si me lesiono o no puedo terminar una etapa?<span class="pm"></span></summary><div class="a">Hay teléfono de asistencia y vehículo de apoyo. Las urgencias sanitarias están cubiertas por el seguro de asistencia. Si alguien prefiere no terminar una etapa por cansancio, también se le recoge, aunque ese traslado se paga aparte.</div></details>
+        <details><summary>¿Los hoteles tienen aire acondicionado?<span class="pm"></span></summary><div class="a">Depende de cada alojamiento: en los hoteles suele haber, en algunos pazos y casas rurales no. En Galicia las noches de junio suelen ser frescas. Te confirmamos cada alojamiento al cerrar el grupo.</div></details>
+        <details><summary>¿Habrá cobertura y wifi?<span class="pm"></span></summary><div class="a">En general hay buena cobertura móvil en el recorrido y wifi en los alojamientos. Aun así, te animamos a desconectar todo lo que puedas.</div></details>
+      </div>
+      <div class="faq-list" id="faq-camino" role="tabpanel" aria-labelledby="tab-camino" hidden>
+        <details open><summary>¿Qué es la Compostela y cómo se consigue?<span class="pm"></span></summary><div class="a">Es el certificado que entrega la Oficina del Peregrino de Santiago a quien recorre al menos los últimos 100 km a pie. Desde Sarria se cumple. Hay que llevar la credencial sellada: en los últimos 100 km se piden al menos dos sellos al día, que se ponen en alojamientos, iglesias y cafés del camino.</div></details>
+        <details><summary>¿Qué es la credencial?<span class="pm"></span></summary><div class="a">Es el «pasaporte» del peregrino, donde se recogen los sellos de cada etapa. Te la damos nosotros al llegar a Sarria, junto con la vieira.</div></details>
+        <details><summary>¿Hay que ser religiosa para hacer el Camino?<span class="pm"></span></summary><div class="a">No. Cada una lo vive a su manera: como pausa, como reto o como búsqueda personal. La Oficina del Peregrino entrega la Compostela a quien lo hace con sentido religioso o espiritual y otro certificado a quien lo hace por otros motivos.</div></details>
+        <details><summary>¿Por qué empezar en Sarria?<span class="pm"></span></summary><div class="a">Porque son los últimos 100 km del Camino Francés, el tramo con más historia y mejor señalizado. Es físicamente asequible y pasa por aldeas, bosques y puentes medievales de la Galicia rural.</div></details>
+        <details><summary>¿Se puede hacer el Camino Portugués?<span class="pm"></span></summary><div class="a">Este grupo hace el Francés desde Sarria: es el tramo más acompañado y el más asequible. El Portugués también es posible, pero algunas etapas son más exigentes y hay menos alojamientos. Si te interesa para otra ocasión, hablamos.</div></details>
+        <details><summary>¿Es fácil perderse?<span class="pm"></span></summary><div class="a">No. Todo el recorrido está marcado con flechas amarillas y mojones de piedra que indican los kilómetros que faltan hasta Santiago.</div></details>
+        <details><summary>¿Qué tiempo hace en junio?<span class="pm"></span></summary><div class="a">Suele ser templado, con días largos. Por la mañana refresca y puede llover: ropa por capas y chubasquero. Unos días antes de salir te enviamos la previsión.</div></details>
+        <details><summary>¿Qué es el Año Santo?<span class="pm"></span></summary><div class="a">Es el año en que el 25 de julio, día de Santiago, cae en domingo. En 2027 se celebra Año Santo Jacobeo: la Puerta Santa de la Catedral estará abierta y es el año con más ambiente. El siguiente no llega hasta 2032.</div></details>
+      </div>
+      <div class="faq-list" id="faq-reserva" role="tabpanel" aria-labelledby="tab-reserva" hidden>
+        <details open><summary>¿Cuánto cuesta y qué incluye?<span class="pm"></span></summary><div class="a">Desde 2.750 € por persona en habitación individual con baño, con todo lo que aparece en «Qué incluye». Los vuelos van aparte. Si prefieres compartir habitación, te damos el precio en doble.</div></details>
+        <details><summary>¿Cómo se paga?<span class="pm"></span></summary><div class="a">En dos pagos, en euros. La reserva de 500 € se paga con tarjeta al apuntarte y se descuenta del total. El resto, antes del 10 de marzo de 2027 (90 días antes de la salida), por transferencia bancaria o con tarjeta.</div></details>
+        <details><summary>¿Hasta cuándo puedo reservar?<span class="pm"></span></summary><div class="a">Hasta el 31 de enero de 2027 o hasta completar las 12 plazas, por orden de reserva. Conviene no esperar: es Año Santo y los alojamientos se llenan pronto.</div></details>
+        <details><summary>¿Qué pasa si tengo que cancelar?<span class="pm"></span></summary><div class="a">Hasta que se confirme el grupo (31 de enero de 2027), te devolvemos la reserva entera. Una vez confirmado, la reserva de 500 € ya no se devuelve. Desde el 10 de marzo de 2027 se aplican además los gastos de cancelación de alojamientos y servicios. Por eso recomendamos un seguro de cancelación. Si el viaje lo cancelamos nosotros, te devolvemos el 100 %.</div></details>
+      </div>
+      <p class="faq-note">¿No encuentras tu pregunta? Escríbenos por <a href="https://wa.me/17814280026?text=Hola%20Alfonso%2C%20tengo%20una%20pregunta%20sobre%20el%20Camino%20de%20junio" style="color:inherit">WhatsApp</a> o a info@evermindconsulting.com y te respondemos.</p>
+    </div>
+  </section>
+
+  <!-- 7 · SANTIAGO: RESERVA -->
+  <section class="section dark" id="reserva" data-km="0" data-place="Santiago">
+    <div class="wrap">
+      <div class="mojon"><span class="mojon-stone"><svg class="ico"><use href="#i-shell"/></svg></span><span class="mojon-txt"><span class="mojon-km">Km 0</span><span class="mojon-place">Santiago de Compostela</span></span></div>
+      <h2 class="h2">Reserva <em>tu plaza</em></h2>
+      <div class="reserve">
+        <aside class="price-card">
+          <p class="eyebrow">Por persona · habitación individual</p>
+          <p class="price"><small style="font-size:.4em;letter-spacing:.02em">desde</small> 2.750 €</p>
+          <p class="price-sub">8 días y 7 noches, del 8 al 15 de junio de 2027, todo lo de «Qué incluye». Vuelos aparte.</p>
+          <ul class="pay">
+            <li>Reserva al apuntarte (se descuenta)<b>500 €</b></li>
+            <li>Resto, 90 días antes<b>10 mar 2027</b></li>
+            <li>Reservas hasta<b>31 ene 2027</b></li>
+          </ul>
+          <div class="seats" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="seats-txt">Grupo de 10 a 12 personas</p>
+        </aside>
+        <div>
+          <ol class="flow">
+            <li><b>1</b>Reservas tu plaza<span>500 € · 2 minutos</span></li>
+            <li><b>2</b>Hablamos tú y yo<span>Llamada a solas</span></li>
+            <li><b>3</b>Se confirma el grupo<span>31 ene 2027</span></li>
+            <li><b>4</b>Pagas el resto<span>Antes del 10 mar</span></li>
+            <li><b>5</b>Dossier y sesión de grupo<span>Mayo</span></li>
+          </ol>
+          <div class="book-cta">
+            <a class="btn btn-red" id="payBtn" href="#">Reservar mi plaza · 500 € <svg class="ico"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost-l" href="https://wa.me/17814280026?text=Hola%20Alfonso%2C%20tengo%20dudas%20sobre%20el%20Camino%20de%20junio">Tengo dudas · WhatsApp</a>
+          </div>
+          <p class="book-note">Pago seguro con tarjeta. Te pedimos tu nombre, email, teléfono y tipo de habitación, y que aceptes las condiciones de abajo. Recibes la confirmación por email y te escribimos para agendar la conversación. ¿Dudas? Escríbeme por WhatsApp al <b>+1 781 428 0026</b>.</p>
+          <details class="conds" id="condiciones">
+            <summary>Condiciones del viaje <span class="pm"></span></summary>
+            <div class="conds-body">
+              <h4>1. Qué contratas</h4>
+              <p>El Camino de Santiago · Edición Club eXpats, del martes 8 al martes 15 de junio de 2027 (8 días y 7 noches), de Sarria a Santiago de Compostela, con los servicios de «Qué incluye». Evermind diseña la experiencia y acompaña al grupo. La logística (alojamientos, traslado de maletas, asistencia en ruta y seguro de asistencia) la opera Viajes Mundiplus, agencia de viajes con licencia CICMA 2620.</p>
+              <h4>2. Precio y pagos</h4>
+              <p>Desde 2.750 € por persona en habitación individual con baño. El precio en habitación doble se da a petición. Los precios son en euros; si pagas desde otra moneda, el cambio y las comisiones de tu banco van a tu cargo. Reserva de plaza: 500 € al apuntarte, que se descuentan del total. Resto: antes del 10 de marzo de 2027, por transferencia bancaria o con tarjeta.</p>
+              <h4>3. Grupo mínimo</h4>
+              <p>El viaje sale con un mínimo de 10 y un máximo de 12 personas. Las reservas se aceptan hasta el 31 de enero de 2027 o hasta completar las plazas.</p>
+              <h4>4. Si cancelas</h4>
+              <p>Hasta la confirmación del grupo (31 de enero de 2027): devolución íntegra de la reserva. Desde la confirmación del grupo: la reserva de 500 € no se devuelve. Desde el 10 de marzo de 2027: además de la reserva, se aplican los gastos de cancelación de alojamientos y servicios ya contratados, que te detallamos por escrito al confirmar el grupo. Recomendamos contratar un seguro de cancelación. Puedes ceder tu plaza a otra persona avisando con tiempo.</p>
+              <h4>5. Si cancelamos nosotros</h4>
+              <p>Si el viaje no puede salir por causas nuestras, te devolvemos el 100 % de lo pagado.</p>
+              <h4>6. Alojamientos y cambios</h4>
+              <p>Los tipos de alojamiento son orientativos y se confirman al cerrar el grupo. Si alguno no está disponible, se sustituye por otro de categoría similar.</p>
+              <h4>7. Salud y forma física</h4>
+              <p>El viaje pide caminar entre 14 y 25 km al día durante seis días. Al reservar confirmas que puedes hacerlo; si tienes dudas, consúltalo con tu médico. Hay vehículo de asistencia si un día no puedes terminar una etapa.</p>
+              <h4>8. Documentación</h4>
+              <p>Cada persona se ocupa de su pasaporte y, si le aplica, de la autorización de viaje para entrar en España.</p>
+              <h4>9. Datos e imágenes</h4>
+              <p>Tus datos se usan solo para organizar el viaje y se comparten con Viajes Mundiplus para las reservas. Solo usamos fotos del grupo con tu permiso.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <img src="img/bosque.jpg" alt="">
+    <div class="wrap">
+      <h2>¿Te vienes <em>al Camino?</em></h2>
+      <p class="body" style="color:var(--light)">Un grupo de 10 a 12 personas, ocho días de junio y 116 km por delante.</p>
+      <a class="btn btn-solid" href="#reserva">Reserva tu plaza <svg class="ico"><use href="#i-arrow"/></svg></a>
+      <p class="buen">Buen Camino</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><img src="img/logo_completo_light.png" alt="Evermind · Turning purpose into direction"></div>
+    <div><h4>La experiencia</h4><p>Camino de Santiago · Edición Club eXpats<br>Sarria → Santiago<br>8–15 junio 2027</p></div>
+    <div><h4>Contacto</h4><p>info@evermindconsulting.com<br>+1 781 428 0026<br>+34 679 50 26 93</p></div>
+    <div><h4>Oficinas</h4><p>Miami, EE. UU.<br>Madrid, España<br>evermindconsulting.com</p></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Header turns solid after the hero
+  var top = document.getElementById('top');
+  var hero = document.querySelector('.hero');
+  function onScroll() { top.classList.toggle('solid', window.scrollY > hero.offsetHeight - 90); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Route rail + mobile progress: each section is a stop on the Camino
+  var stops = Array.prototype.slice.call(document.querySelectorAll('section[data-km]'));
+  var items = Array.prototype.slice.call(document.querySelectorAll('#rail li'));
+  var fill = document.getElementById('railFill');
+  var rail = document.getElementById('rail');
+  var prog = document.getElementById('progress'), progBar = document.getElementById('progBar'), progPlace = document.getElementById('progPlace');
+  function updateRail() {
+    var mid = window.innerHeight * 0.45, idx = -1;
+    stops.forEach(function (s, i) { if (s.getBoundingClientRect().top < mid) idx = i; });
+    items.forEach(function (li, i) { li.classList.toggle('on', i === idx); li.classList.toggle('done', i < idx); });
+    if (idx >= 0) {
+      var a = items[0].querySelector('.dot').getBoundingClientRect(), b = items[idx].querySelector('.dot').getBoundingClientRect();
+      fill.style.height = (b.top - a.top) + 'px';
+      var s = stops[idx]; progPlace.textContent = s.dataset.place + ' · km ' + s.dataset.km;
+      progBar.style.width = ((116 - Number(s.dataset.km)) / 116 * 100) + '%';
+      rail.classList.toggle('on-dark', s.classList.contains('dark'));
+    } else { fill.style.height = '0px'; }
+    prog.classList.toggle('show', window.scrollY > hero.offsetHeight * 0.8);
+  }
+  window.addEventListener('scroll', updateRail, { passive: true }); window.addEventListener('resize', updateRail); updateRail();
+
+  // Itinerary map: real positions (lat/lon), slightly stretched north–south for legibility
+  var STOPS = [
+    { n: 'Sarria', lat: 42.7807, lon: -7.4142, km: 116, lx: 0, ly: -22, img: 'img/d1.jpg', cap: 'Imagen ilustrativa',
+      txt: 'Aquí empieza todo. Sarria es el punto de partida de miles de peregrinos por estar justo antes de los últimos 100 km. Su casco antiguo sube en cuesta por la Rúa Maior, con iglesias medievales y el convento de la Magdalena.',
+      see: ['Un paseo por la Rúa Maior al atardecer', 'El primer sello en tu credencial'], sleepI: 'i-hotel', sleep: 'Hotel 4* en el pueblo' },
+    { n: 'Portomarín', lat: 42.8075, lon: -7.6158, km: 94, lx: -26, ly: 36, img: 'img/d2.jpg', cap: 'Imagen ilustrativa',
+      txt: 'Un pueblo trasladado piedra a piedra en los años sesenta, cuando el embalse de Belesar cubrió el antiguo. Se llega cruzando un largo puente sobre el Miño. A mitad de etapa pasarás junto al mojón del kilómetro 100.',
+      see: ['La iglesia-fortaleza de San Nicolás, reconstruida en la plaza', 'Las vistas del embalse desde lo alto'], sleepI: 'i-hotel', sleep: 'Hotel 3* en el pueblo' },
+    { n: 'Palas de Rei', lat: 42.8730, lon: -7.8687, km: 69, lx: 0, ly: 38, img: 'img/d3.jpg', cap: 'Imagen ilustrativa',
+      txt: 'Su nombre recuerda un antiguo palacio real. La etapa es la más larga del viaje y también una de las más rurales: prados, robles y aldeas donde el tiempo va más despacio.',
+      see: ['La iglesia de San Tirso', 'El castillo medieval de Pambre, en los alrededores'], sleepI: 'i-house', sleep: 'Casa rural en las afueras, con traslado' },
+    { n: 'Melide', lat: 42.9140, lon: -8.0150, km: 53, lx: 10, ly: 38, img: 'img/d4.jpg', cap: 'Pulpo á feira',
+      txt: 'Aquí el Camino Primitivo se une al Francés. Antes de llegar cruzarás el puente medieval de Furelos. Melide es famoso en toda Galicia por su pulpo á feira.',
+      see: ['Comer pulpo en una de sus pulperías', 'El puente medieval de Furelos'], sleepI: 'i-hotel', sleep: 'Hotel 3* en el pueblo' },
+    { n: 'Arzúa', lat: 42.9265, lon: -8.1636, km: 39, lx: 0, ly: -22, img: 'img/d5.jpg', cap: 'Imagen ilustrativa',
+      txt: 'Tierra de queso: el Arzúa-Ulloa tiene denominación de origen. Aquí se suma el Camino del Norte. La etapa es corta y pasa por bosques y valles de río, como el de Ribadiso.',
+      see: ['Probar el queso de Arzúa', 'El puente y el río en Ribadiso'], sleepI: 'i-pazo', sleep: 'Pazo rural en las afueras, con traslado' },
+    { n: 'O Pedrouzo', lat: 42.9050, lon: -8.3620, km: 20, lx: 0, ly: 38, img: 'img/d6.jpg', cap: 'Imagen ilustrativa',
+      txt: 'Pequeño pueblo entre bosques de eucalipto, ya en el municipio de O Pino. Es la última noche antes de Santiago: se nota el ambiente de víspera.',
+      see: ['Caminar entre eucaliptos a primera hora', 'Una última cena tranquila antes de la llegada'], sleepI: 'i-pazo', sleep: 'Pazo y casa rural cercanos, con traslado' },
+    { n: 'Santiago', lat: 42.8806, lon: -8.5446, km: 0, lx: 0, ly: -22, img: 'img/d7.jpg', cap: 'Santiago de Compostela',
+      txt: 'Desde el Monte do Gozo se ven por primera vez las torres de la Catedral. Después, la llegada a la Plaza del Obradoiro y la Compostela en la Oficina del Peregrino. Su casco histórico es Patrimonio de la Humanidad.',
+      see: ['La Misa del Peregrino en la Catedral', 'Un paseo por la Rúa do Franco y el Mercado de Abastos'], sleepI: 'i-hotel', sleep: 'Hotel 4* en el centro' }
+  ];
+  var DAYS = [
+    { s: 0, d: 'Día 1 · Martes 8 de junio', leg: 'Llegada y cena de bienvenida' },
+    { s: 1, d: 'Día 2 · Miércoles 9 de junio', leg: 'Etapa desde Sarria', km: '22,8' },
+    { s: 2, d: 'Día 3 · Jueves 10 de junio', leg: 'Etapa desde Portomarín', km: '25' },
+    { s: 3, d: 'Día 4 · Viernes 11 de junio', leg: 'Etapa desde Palas de Rei', km: '15,2' },
+    { s: 4, d: 'Día 5 · Sábado 12 de junio', leg: 'Etapa desde Melide', km: '14,3' },
+    { s: 5, d: 'Día 6 · Domingo 13 de junio', leg: 'Etapa desde Arzúa', km: '19,2' },
+    { s: 6, d: 'Día 7 · Lunes 14 de junio', leg: 'Etapa desde O Pedrouzo · cena de despedida', km: '19,9' },
+    { s: 6, d: 'Día 8 · Martes 15 de junio', leg: 'Desayuno, cierre del grupo y salida', img: 'img/d8.jpg', cap: 'Catedral de Santiago' }
+  ];
+  var NS = 'http://www.w3.org/2000/svg';
+  function px(s) { return { x: 40 + (s.lon + 8.62) / 1.29 * 920, y: 300 - (s.lat - 42.76) / 0.19 * 240 }; }
+  var P = STOPS.map(px);
+  // subtle contour lines
+  var cg = document.getElementById('contours');
+  [[300, 120, 210, 70], [520, 200, 260, 90], [690, 110, 150, 60], [180, 230, 170, 60], [840, 230, 140, 70]].forEach(function (c) {
+    for (var k = 0; k < 3; k++) { var e = document.createElementNS(NS, 'ellipse'); e.setAttribute('class', 'contour'); e.setAttribute('cx', c[0]); e.setAttribute('cy', c[1]); e.setAttribute('rx', c[2] - k * 34); e.setAttribute('ry', c[3] - k * 14); cg.appendChild(e); }
+  });
+  // segments between stops (gentle curves)
+  var sg = document.getElementById('segs'), onSegs = [];
+  for (var k = 0; k < P.length - 1; k++) {
+    var a = P[k], b = P[k + 1], mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2 + (k % 2 ? -18 : 18);
+    var d = 'M' + a.x + ' ' + a.y + ' Q ' + mx + ' ' + my + ' ' + b.x + ' ' + b.y;
+    var base = document.createElementNS(NS, 'path'); base.setAttribute('d', d); base.setAttribute('class', 'seg'); sg.appendChild(base);
+    var on = document.createElementNS(NS, 'path'); on.setAttribute('d', d); on.setAttribute('class', 'seg-on'); sg.appendChild(on);
+    var L = on.getTotalLength(); on.style.strokeDasharray = L; on.style.strokeDashoffset = L; onSegs.push({ el: on, L: L });
+  }
+  var stg = document.getElementById('stops'), stopEls = [];
+  STOPS.forEach(function (s, i) {
+    var g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'stop'); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button');
+    g.setAttribute('aria-label', s.n + ', kilómetro ' + s.km);
+    g.setAttribute('transform', 'translate(' + P[i].x + ' ' + P[i].y + ')');
+    g.innerHTML = '<circle class="halo" r="22"></circle><circle class="pt" r="9"></circle>' +
+      '<text class="nm" text-anchor="middle" x="' + s.lx + '" y="' + s.ly + '">' + s.n + '</text>' +
+      '<text class="km" text-anchor="middle" x="' + s.lx + '" y="' + (s.ly < 0 ? s.ly - 22 : s.ly + 16) + '">KM ' + s.km + '</text>';
+    g.addEventListener('click', function () { goStop(i); });
+    g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goStop(i); } });
+    stg.appendChild(g); stopEls.push(g);
+  });
+  onSegs.forEach(function (o) { o.el.style.strokeDashoffset = 0; });
+  // Map stops jump to that day's card (Sarria = día 1 … Santiago = día 7)
+  function goStop(i) {
+    var t = document.getElementById('dia-' + (i + 1)); if (!t) return;
+    var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    t.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  // FAQ tabs
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.faq-tabs [role=tab]'));
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (x) {
+        var on = x === t; x.setAttribute('aria-selected', on);
+        document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+      });
+    });
+  });
+
+  // Packing list (remembered in this browser only)
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#pack input'));
+  var count = document.getElementById('packCount');
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem('camino-pack') || '{}'); } catch (e) { saved = {}; }
+  function paint() { var n = boxes.filter(function (b) { return b.checked; }).length; count.textContent = n + ' de ' + boxes.length + ' listos'; }
+  boxes.forEach(function (b) {
+    if (saved[b.id]) b.checked = true;
+    b.addEventListener('change', function () { saved[b.id] = b.checked; try { localStorage.setItem('camino-pack', JSON.stringify(saved)); } catch (e) {} paint(); });
+  });
+  paint();
+
+  // Reserve button: Stripe Payment Link once it exists; until then it opens WhatsApp to book
+  var PAY_URL = '';  // <- pegar aquí el enlace de pago de Stripe
+  var pay = document.getElementById('payBtn');
+  pay.href = PAY_URL || 'https://wa.me/17814280026?text=Hola%20Alfonso%2C%20quiero%20reservar%20mi%20plaza%20para%20el%20Camino%20del%208%20al%2015%20de%20junio';
+  pay.target = '_blank'; pay.rel = 'noopener';
+})();
+</script>
