@@ -325,6 +325,10 @@ fieldset.f { border: 0; padding: 0; margin: 0; }
 .conds[open] summary .pm { transform: rotate(45deg); }
 .conds-body h4 { font: 600 12px/1.3 var(--sans); letter-spacing: .06em; color: var(--light); margin: 18px 0 6px; }
 .conds-body p { font-size: 14px; line-height: 1.6; color: rgba(236,237,232,.82); margin: 0; max-width: 70ch; }
+.zelle { list-style: none; margin: 18px 0 0; padding: 0; display: grid; }
+.zelle li { display: flex; justify-content: space-between; gap: 16px; padding-block: 12px; border-top: 1px solid rgba(236,237,232,.18); font-size: 14px; }
+.zelle li b { font-weight: 600; color: var(--ground); text-align: right; font-variant-numeric: tabular-nums; }
+.f.full { grid-column: 1 / -1; }
 .book-done { border: 1px solid var(--ground); padding: clamp(24px, 4vw, 40px); }
 .book-done h3 { font-family: var(--serif); font-weight: 400; font-size: 34px; }
 .book-done h3 em { color: var(--ground); }
@@ -725,9 +729,9 @@ footer p { line-height: 1.7; color: rgba(236,237,232,.8); }
       </div>
       <div class="faq-list" id="faq-reserva" role="tabpanel" aria-labelledby="tab-reserva" hidden>
         <details open><summary>¿Cuánto cuesta y qué incluye?<span class="pm"></span></summary><div class="a">Desde 2.750 € por persona en habitación individual con baño, con todo lo que aparece en «Qué incluye». Los vuelos van aparte. Si prefieres compartir habitación, te damos el precio en doble.</div></details>
-        <details><summary>¿Cómo se paga?<span class="pm"></span></summary><div class="a">En dos pagos, en euros. La reserva de 500 € se paga con tarjeta al apuntarte y se descuenta del total. El resto, antes del 10 de marzo de 2027 (90 días antes de la salida), por transferencia bancaria o con tarjeta.</div></details>
+        <details><summary>¿Cómo se paga?<span class="pm"></span></summary><div class="a">En dos pagos. La reserva, 600 USD por Zelle al apuntarte, equivale a 500 € y se descuenta del total. El resto, antes del 10 de marzo de 2027 (90 días antes de la salida), en dólares al cambio de ese día: te mandamos el importe exacto. Si no tienes Zelle, escríbenos y buscamos otra forma.</div></details>
         <details><summary>¿Hasta cuándo puedo reservar?<span class="pm"></span></summary><div class="a">Hasta el 31 de enero de 2027 o hasta completar las 12 plazas, por orden de reserva. Conviene no esperar: es Año Santo y los alojamientos se llenan pronto.</div></details>
-        <details><summary>¿Qué pasa si tengo que cancelar?<span class="pm"></span></summary><div class="a">Hasta que se confirme el grupo (31 de enero de 2027), te devolvemos la reserva entera. Una vez confirmado, la reserva de 500 € ya no se devuelve. Desde el 10 de marzo de 2027 se aplican además los gastos de cancelación de alojamientos y servicios. Por eso recomendamos un seguro de cancelación. Si el viaje lo cancelamos nosotros, te devolvemos el 100 %.</div></details>
+        <details><summary>¿Qué pasa si tengo que cancelar?<span class="pm"></span></summary><div class="a">Hasta que se confirme el grupo (31 de enero de 2027), te devolvemos la reserva entera. Una vez confirmado, la reserva ya no se devuelve. Desde el 10 de marzo de 2027 se aplican además los gastos de cancelación de alojamientos y servicios. Por eso recomendamos un seguro de cancelación. Si el viaje lo cancelamos nosotros, te devolvemos el 100 %.</div></details>
       </div>
       <p class="faq-note">¿No encuentras tu pregunta? Escríbenos por <a href="https://wa.me/17814280026?text=Hola%20Alfonso%2C%20tengo%20una%20pregunta%20sobre%20el%20Camino%20de%20junio" style="color:inherit">WhatsApp</a> o a info@evermindconsulting.com y te respondemos.</p>
     </div>
@@ -744,7 +748,7 @@ footer p { line-height: 1.7; color: rgba(236,237,232,.8); }
           <p class="price"><small style="font-size:.4em;letter-spacing:.02em">desde</small> 2.750 €</p>
           <p class="price-sub">8 días y 7 noches, del 8 al 15 de junio de 2027, todo lo de «Qué incluye». Vuelos aparte.</p>
           <ul class="pay">
-            <li>Reserva al apuntarte (se descuenta)<b>500 €</b></li>
+            <li>Reserva por Zelle (se descuenta)<b>600 USD</b></li>
             <li>Resto, 90 días antes<b>10 mar 2027</b></li>
             <li>Reservas hasta<b>31 ene 2027</b></li>
           </ul>
@@ -753,28 +757,54 @@ footer p { line-height: 1.7; color: rgba(236,237,232,.8); }
         </aside>
         <div>
           <ol class="flow">
-            <li><b>1</b>Reservas tu plaza<span>500 € · 2 minutos</span></li>
+            <li><b>1</b>Reservas tu plaza<span>600 USD por Zelle</span></li>
             <li><b>2</b>Hablamos tú y yo<span>Llamada a solas</span></li>
             <li><b>3</b>Se confirma el grupo<span>31 ene 2027</span></li>
             <li><b>4</b>Pagas el resto<span>Antes del 10 mar</span></li>
             <li><b>5</b>Dossier y sesión de grupo<span>Mayo</span></li>
           </ol>
-          <div class="book-cta">
-            <a class="btn btn-red" id="payBtn" href="#">Reservar mi plaza · 500 € <svg class="ico"><use href="#i-arrow"/></svg></a>
-            <a class="btn btn-ghost-l" href="https://wa.me/17814280026?text=Hola%20Alfonso%2C%20tengo%20dudas%20sobre%20el%20Camino%20de%20junio">Tengo dudas · WhatsApp</a>
+          <form class="book" id="book" novalidate>
+            <div class="f"><label for="nombre">Nombre y apellidos</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+            <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+            <div class="f"><label for="tel">Teléfono / WhatsApp</label><input id="tel" name="tel" type="tel" autocomplete="tel" required></div>
+            <fieldset class="f"><legend>Habitación</legend>
+              <div class="chips">
+                <label><input type="radio" name="hab" id="h1" value="individual" checked>Individual</label>
+                <label><input type="radio" name="hab" id="h2" value="compartida">Compartida</label>
+              </div>
+            </fieldset>
+            <div class="f full"><label for="nota">¿Algo que debamos saber? (opcional)</label><textarea id="nota" name="nota" placeholder="Con quién compartes habitación, alergias, dudas…"></textarea></div>
+            <div class="f full"><label class="check" for="ok"><input type="checkbox" id="ok" name="ok" required>He leído y acepto las <a href="#condiciones" id="openConds" style="color:inherit">condiciones del viaje</a>.</label></div>
+            <div class="form-foot">
+              <button class="btn btn-red" type="submit">Reservar mi plaza · 600 USD <svg class="ico"><use href="#i-arrow"/></svg></button>
+              <small>Al enviarlo se abre WhatsApp con tus datos para que me los mandes, y te enseñamos cómo pagar la reserva por Zelle.</small>
+              <p class="err" id="err" role="alert"></p>
+            </div>
+          </form>
+          <div class="book-done" id="done" hidden tabindex="-1">
+            <h3>Ya casi <em>está</em></h3>
+            <p id="doneTxt">Para confirmar tu plaza, envía la reserva por Zelle:</p>
+            <ul class="zelle">
+              <li>Importe<b>600 USD</b></li>
+              <li>A nombre de<b>Alfonso Barral</b></li>
+              <li>Zelle (teléfono)<b>+1 781 428 0026</b></li>
+              <li>Concepto<b>Tu nombre · Camino junio</b></li>
+            </ul>
+            <p>Cuando lo recibamos, te confirmo la plaza por WhatsApp. Si no se ha abierto WhatsApp con tus datos, <a id="waAgain" href="#" target="_blank" rel="noopener" style="color:var(--ground)">pulsa aquí para enviarlos</a>.</p>
+            <button class="btn btn-ghost-l" type="button" id="again" style="margin-top:22px">Volver al formulario</button>
           </div>
-          <p class="book-note">Pago seguro con tarjeta. Te pedimos tu nombre, email, teléfono y tipo de habitación, y que aceptes las condiciones de abajo. Recibes la confirmación por email y te escribimos para agendar la conversación. ¿Dudas? Escríbeme por WhatsApp al <b>+1 781 428 0026</b>.</p>
+          <p class="book-note">¿Dudas antes de reservar? Escríbeme por WhatsApp al <b>+1 781 428 0026</b> o pulsa <a href="https://wa.me/17814280026?text=Hola%20Alfonso%2C%20tengo%20dudas%20sobre%20el%20Camino%20de%20junio" target="_blank" rel="noopener" style="color:var(--ground)">aquí</a>.</p>
           <details class="conds" id="condiciones">
             <summary>Condiciones del viaje <span class="pm"></span></summary>
             <div class="conds-body">
               <h4>1. Qué contratas</h4>
               <p>El Camino de Santiago · Edición Club eXpats, del martes 8 al martes 15 de junio de 2027 (8 días y 7 noches), de Sarria a Santiago de Compostela, con los servicios de «Qué incluye». Evermind diseña la experiencia y acompaña al grupo. La logística (alojamientos, traslado de maletas, asistencia en ruta y seguro de asistencia) la opera Viajes Mundiplus, agencia de viajes con licencia CICMA 2620.</p>
               <h4>2. Precio y pagos</h4>
-              <p>Desde 2.750 € por persona en habitación individual con baño. El precio en habitación doble se da a petición. Los precios son en euros; si pagas desde otra moneda, el cambio y las comisiones de tu banco van a tu cargo. Reserva de plaza: 500 € al apuntarte, que se descuentan del total. Resto: antes del 10 de marzo de 2027, por transferencia bancaria o con tarjeta.</p>
+              <p>Desde 2.750 € por persona en habitación individual con baño. El precio en habitación doble se da a petición. El precio del viaje está en euros. Reserva de plaza: 600 USD por Zelle al apuntarte, que equivalen a 500 € y se descuentan del total. Resto: antes del 10 de marzo de 2027, en dólares al cambio de ese día; te enviamos el importe exacto por escrito. Tu plaza queda confirmada cuando recibimos la reserva y te lo confirmamos por WhatsApp o email.</p>
               <h4>3. Grupo mínimo</h4>
               <p>El viaje sale con un mínimo de 10 y un máximo de 12 personas. Las reservas se aceptan hasta el 31 de enero de 2027 o hasta completar las plazas.</p>
               <h4>4. Si cancelas</h4>
-              <p>Hasta la confirmación del grupo (31 de enero de 2027): devolución íntegra de la reserva. Desde la confirmación del grupo: la reserva de 500 € no se devuelve. Desde el 10 de marzo de 2027: además de la reserva, se aplican los gastos de cancelación de alojamientos y servicios ya contratados, que te detallamos por escrito al confirmar el grupo. Recomendamos contratar un seguro de cancelación. Puedes ceder tu plaza a otra persona avisando con tiempo.</p>
+              <p>Hasta la confirmación del grupo (31 de enero de 2027): devolución íntegra de la reserva. Desde la confirmación del grupo: la reserva no se devuelve. Desde el 10 de marzo de 2027: además de la reserva, se aplican los gastos de cancelación de alojamientos y servicios ya contratados, que te detallamos por escrito al confirmar el grupo. Recomendamos contratar un seguro de cancelación. Puedes ceder tu plaza a otra persona avisando con tiempo.</p>
               <h4>5. Si cancelamos nosotros</h4>
               <p>Si el viaje no puede salir por causas nuestras, te devolvemos el 100 % de lo pagado.</p>
               <h4>6. Alojamientos y cambios</h4>
@@ -935,10 +965,28 @@ footer p { line-height: 1.7; color: rgba(236,237,232,.8); }
   });
   paint();
 
-  // Reserve button: Stripe Payment Link once it exists; until then it opens WhatsApp to book
-  var PAY_URL = '';  // <- pegar aquí el enlace de pago de Stripe
-  var pay = document.getElementById('payBtn');
-  pay.href = PAY_URL || 'https://wa.me/17814280026?text=Hola%20Alfonso%2C%20quiero%20reservar%20mi%20plaza%20para%20el%20Camino%20del%208%20al%2015%20de%20junio';
-  pay.target = '_blank'; pay.rel = 'noopener';
+  // Booking: in-page form -> WhatsApp message with the data + Zelle instructions
+  var form = document.getElementById('book'), done = document.getElementById('done'), err = document.getElementById('err');
+  document.getElementById('openConds').addEventListener('click', function () { document.getElementById('condiciones').open = true; });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var missing = [];
+    if (!form.nombre.value.trim()) missing.push('tu nombre');
+    if (!/^\S+@\S+\.\S+$/.test(form.email.value.trim())) missing.push('un email válido');
+    if (!form.tel.value.trim()) missing.push('tu teléfono');
+    if (!form.ok.checked) missing.push('aceptar las condiciones');
+    if (missing.length) { err.textContent = 'Falta ' + missing.join(', ') + '.'; return; }
+    err.textContent = '';
+    var hab = form.querySelector('input[name=hab]:checked').value;
+    var msg = 'Hola Alfonso, quiero reservar mi plaza en el Camino de Santiago del 8 al 15 de junio de 2027.\n\n' +
+      'Nombre: ' + form.nombre.value.trim() + '\nEmail: ' + form.email.value.trim() + '\nTeléfono: ' + form.tel.value.trim() +
+      '\nHabitación: ' + hab + (form.nota.value.trim() ? '\nNota: ' + form.nota.value.trim() : '') +
+      '\n\nHe leído y acepto las condiciones del viaje. Envío la reserva de 600 USD por Zelle.';
+    var url = 'https://wa.me/17814280026?text=' + encodeURIComponent(msg);
+    document.getElementById('waAgain').href = url;
+    window.open(url, '_blank', 'noopener');
+    form.hidden = true; done.hidden = false; done.focus();
+  });
+  document.getElementById('again').addEventListener('click', function () { done.hidden = true; form.hidden = false; });
 })();
 </script>
